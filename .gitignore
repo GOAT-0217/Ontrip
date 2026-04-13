@@ -1,0 +1,4 @@
+# 环境变量文件（包含敏感密钥）
+.env
+.env.*
+!.env.examplegit rm --cached .env
