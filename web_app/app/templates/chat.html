@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Ontrip · 智能旅行助手</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/ontrip.css">
+</head>
+<body>
+<div class="app-container">
+    <div class="chat-area">
+        <div class="chat-header">
+            <div class="logo"><span>✈️</span></div>
+            <div class="header-title">
+                <h2>Ontrip</h2>
+                <p>AI 旅行管家 · 随时为您服务</p>
+            </div>
+        </div>
+
+        <div id="chat-messages" class="chat-messages">
+            {% for message in chat_history %}
+            <div class="message user-message">
+                <div class="message-content">
+                    <div class="message-sender">你</div>
+                    {{ message.user_message }}
+                </div>
+            </div>
+            <div class="message ai-message">
+                <div class="message-content">
+                    <div class="message-sender">Ontrip</div>
+                    {{ message.ai_response }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="chat-input-area">
+            <div id="loading-indicator" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <span>Ontrip 正在思考...</span>
+            </div>
+            <div class="input-wrapper">
+                <input type="text" id="user-input" placeholder="告诉 Ontrip 您的旅行需求..." autocomplete="off" />
+                <button class="send-btn" id="send-btn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="operation-log">
+        <div class="log-header">
+            <h3>📋 操作日志</h3>
+            <button class="clear-log-btn" onclick="clearOperationLog()">清除</button>
+        </div>
+        <div id="operation-log-content"></div>
+    </div>
+</div>
+
+<div id="pending-action-modal" class="pending-action-modal">
+    <div class="modal-content">
+        <h3>⚠️ 敏感操作确认</h3>
+        <div id="pending-action-details"></div>
+        <div class="modal-buttons">
+            <button class="approve-btn" onclick="approveAction()">✓ 批准</button>
+            <button class="reject-btn" onclick="rejectAction()">✗ 拒绝</button>
+        </div>
+    </div>
+</div>
+
+<script src="/static/ontrip.js"></script>
+</body>
+</html>
