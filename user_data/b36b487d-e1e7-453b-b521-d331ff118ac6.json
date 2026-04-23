@@ -1,0 +1,33 @@
+{
+  "session_id": "b36b487d-e1e7-453b-b521-d331ff118ac6",
+  "chat_history": [
+    {
+      "timestamp": "2026-04-20T21:48:52.928056",
+      "user_message": "Search for blog posts about travel tips",
+      "ai_response": "I'll help you search for blog posts about travel tips. Let me connect you with our blog search specialist."
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "Search for blog posts about travel tips",
+      "timestamp": "2026-04-20T21:48:45.526601"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "I'll help you search for blog posts about travel tips. Let me connect you with our blog search specialist.",
+      "timestamp": "2026-04-20T21:48:52.748544"
+    },
+    {
+      "type": "error",
+      "title": "Processing Error",
+      "content": "Error code: 400 - {'error': {'message': \"An assistant message with 'tool_calls' must be followed by tool messages responding to each 'tool_call_id'. (insufficient tool messages following tool_calls message)\", 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}",
+      "timestamp": "2026-04-20T21:48:52.928056"
+    }
+  ],
+  "created_at": "2026-04-20T21:48:45.523963"
+}

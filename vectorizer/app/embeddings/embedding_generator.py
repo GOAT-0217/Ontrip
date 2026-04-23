@@ -5,16 +5,15 @@ from typing import Union, List
 
 settings = get_settings()
 
-# Configure OpenAI embeddings with embedding-specific configuration
 if settings.EMBEDDING_BASE_URL:
     embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small",
+        model=settings.EMBEDDING_MODEL,
         openai_api_key=settings.EMBEDDING_API_KEY,
         openai_api_base=settings.EMBEDDING_BASE_URL
     )
 else:
     embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small",
+        model=settings.EMBEDDING_MODEL,
         openai_api_key=settings.EMBEDDING_API_KEY
     )
 

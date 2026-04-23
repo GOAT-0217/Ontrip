@@ -1,21 +1,14 @@
 import os
 from langchain_openai import OpenAIEmbeddings
 
-# --- Configuration ---
-# Ensure the OPENAI_API_KEY environment variable is set.
-# You can set it in your terminal like this:
-# Linux/macOS: export OPENAI_API_KEY='your-api-key-here'
-# Windows (Command Prompt): set OPENAI_API_KEY=your-api-key-here
-# Windows (PowerShell): $env:OPENAI_API_KEY="your-api-key-here"
-
-API_KEY = os.getenv("OPENAI_API_KEY")
-BASE_URL = os.getenv("OPENAI_BASE_URL")
+API_KEY = os.getenv("EMBEDDING_API_KEY", os.getenv("OPENAI_API_KEY"))
+BASE_URL = os.getenv("EMBEDDING_BASE_URL", "https://api.siliconflow.cn/v1")
 if not API_KEY:
-    raise ValueError("OPENAI_API_KEY environment variable not set.")
+    raise ValueError("EMBEDDING_API_KEY or OPENAI_API_KEY environment variable not set.")
 
 print(API_KEY)
 print(BASE_URL)
-MODEL_NAME = "text-embedding-ada-002"
+MODEL_NAME = os.getenv("EMBEDDING_MODEL", "BAAI/bge-m3")
 # ----------------------
 
 def generate_embeddings(texts, model=MODEL_NAME):
@@ -29,7 +22,6 @@ def generate_embeddings(texts, model=MODEL_NAME):
     Returns:
         list: A list of embedding vectors.
     """
-    # Configure OpenAI embeddings
     if BASE_URL:
         embeddings = OpenAIEmbeddings(
             model=model,

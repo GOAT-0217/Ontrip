@@ -1,0 +1,33 @@
+{
+  "session_id": "d5cfab9a-37c1-4d6f-8ed9-8d182c57251c",
+  "chat_history": [
+    {
+      "timestamp": "2026-04-20T21:39:58.829250",
+      "user_message": "What is the refund policy?",
+      "ai_response": "I'll check our company's refund policy for you."
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "What is the refund policy?",
+      "timestamp": "2026-04-20T21:39:23.672891"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "I'll check our company's refund policy for you.",
+      "timestamp": "2026-04-20T21:39:31.406237"
+    },
+    {
+      "type": "error",
+      "title": "Processing Error",
+      "content": "Error code: 400 - {'error': {'message': \"An assistant message with 'tool_calls' must be followed by tool messages responding to each 'tool_call_id'. (insufficient tool messages following tool_calls message)\", 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}",
+      "timestamp": "2026-04-20T21:39:58.828210"
+    }
+  ],
+  "created_at": "2026-04-20T21:39:23.669375"
+}

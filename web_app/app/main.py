@@ -1,15 +1,17 @@
+import sys
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
+
 from fastapi import FastAPI, Request, Depends, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from dotenv import load_dotenv
 from pydantic import BaseModel
 import uuid
-import os
-import sys
-
-# Add the customer_support_chat directory to the path
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 from customer_support_chat.app.services.chat_service import process_user_message
 from .core.user_data_manager import (
@@ -91,6 +93,22 @@ async def chat(chat_message: ChatMessage, session_data: dict = Depends(get_sessi
         print(f"Error processing chat message: {e}")
         # Return a user-friendly error message
         return JSONResponse(content={"error": "An unexpected error occurred. Please try again later."}, status_code=500)
+
+@app.post("/new-chat")
+async def new_chat(request: Request):
+    """Start a new conversation by generating a new session ID."""
+    from .core.user_data_manager import clear_session_data
+    
+    new_session_id = str(uuid.uuid4())
+    
+    # Clear old session data if exists
+    old_session_id = request.cookies.get("session_id")
+    if old_session_id:
+        clear_session_data(old_session_id)
+    
+    response = JSONResponse(content={"session_id": new_session_id})
+    response.set_cookie(key="session_id", value=new_session_id)
+    return response
 
 # HITL (Human-in-the-Loop) endpoints
 

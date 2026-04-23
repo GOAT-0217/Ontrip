@@ -1,0 +1,33 @@
+{
+  "session_id": "93a680ba-2b8c-4c7d-873c-fe11fef6bced",
+  "chat_history": [
+    {
+      "timestamp": "2026-04-20T21:48:29.534082",
+      "user_message": "What are my current flights?",
+      "ai_response": "I can see you have two flights booked. Would you like to make any changes to these flights?"
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "What are my current flights?",
+      "timestamp": "2026-04-20T21:48:15.163889"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "根据您的预订信息，我看到您目前有以下两个航班预订：\n\n## 航班 1\n- **机票号码**: TKT001\n- **预订参考号**: BOOK001\n- **航班号**: AA100\n- **出发**: 洛杉矶国际机场 (LAX) → 纽约肯尼迪机场 (JFK)\n- **出发时间**: 2026年4月21日 08:00:00\n- **到达时间**: 2026年4月21日 13:00:00\n- **座位**: 12A\n- **舱位**: 经济舱\n\n## 航班 2\n- **机票号码**: TKT002\n- **预订参考号**: BOOK002\n- **航班号**: DL300\n- **出发**: 洛杉矶国际机场 (LAX) → 迈阿密国际机场 (MIA)\n- **出发时间**: 2026年4月23日 08:00:00\n- **到达时间**: 2026年4月23日 13:00:00\n- **座位**: 3C\n- **舱位**: 商务舱\n\n**请注意**：您的第一个航班明天（2026年4月21日）早上8点就要从洛杉矶起飞了。如果您需要对这些航班进行任何修改、取消或其他操作，请告诉我！",
+      "timestamp": "2026-04-20T21:48:27.587357"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "I can see you have two flights booked. Would you like to make any changes to these flights?",
+      "timestamp": "2026-04-20T21:48:29.530068"
+    }
+  ],
+  "created_at": "2026-04-20T21:48:15.160867"
+}

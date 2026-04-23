@@ -21,6 +21,9 @@ class State(TypedDict):
                 "book_car_rental",
                 "book_hotel",
                 "book_excursion",
+                "woocommerce",
+                "form_submission",
+                "blog_search",
             ]
         ],
         update_dialog_stack,

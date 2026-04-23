@@ -155,8 +155,7 @@ class VectorDB:
             base_url = base_url[:-3]
         embedding_url = f"{base_url}/v1/embeddings"
 
-        # 强制使用硅基流动支持的模型
-        model = 'BAAI/bge-m3'
+        model = settings.EMBEDDING_MODEL
 
         logger.info(f"Using embedding URL: {embedding_url}")
         logger.info(f"Using model: {model}")
@@ -580,17 +579,16 @@ class VectorDB:
         available_models = await self.get_available_models()
 
         primary_models = [
+            settings.EMBEDDING_MODEL,
             "BAAI/bge-m3",
-            "bge-m3",
             "BAAI/bge-large-zh-v1.5",
-            "bge-large-zh-v1.5",
+            "BAAI/bge-large-en-v1.5",
         ]
         fallback_models = [
-            "text-embedding-ada-002",
-            "text-embedding-v1",
-            "embedding-v1",
-            "ada",
-            "davinci"
+            "bge-m3",
+            "bge-large-zh-v1.5",
+            "BAAI/bge-small-zh-v1.0",
+            "netease-youdao/bce-embedding-base_v1",
         ]
 
         models_to_try = []
@@ -661,13 +659,13 @@ class VectorDB:
 
     def search(self, query, limit=2, with_payload=True):
         query_vector = generate_embedding(query)
-        search_result = self.client.search(
+        search_result = self.client.query_points(
             collection_name=self.collection_name,
-            query_vector=query_vector,
+            query=query_vector,
             limit=limit,
             with_payload=with_payload
         )
-        return search_result
+        return search_result.points
 
 
 if __name__ == "__main__":

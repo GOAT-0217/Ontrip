@@ -12,6 +12,7 @@ from .cars import (
     book_car_rental,
     update_car_rental,
     cancel_car_rental,
+    estimate_didi_ride,
 )
 from .hotels import (
     search_hotels,
@@ -29,6 +30,7 @@ from .excursions import (
 from .woocommerce import search_products, search_orders
 from .forms import submit_form
 from .blog import search_blog_posts
+from .web_search import web_search
 
 __all__ = [
     "lookup_policy",
@@ -41,6 +43,7 @@ __all__ = [
     "book_car_rental",
     "update_car_rental",
     "cancel_car_rental",
+    "estimate_didi_ride",
     "search_hotels",
     "book_hotel",
     "update_hotel",
@@ -54,4 +57,5 @@ __all__ = [
     "search_orders",
     "submit_form",
     "search_blog_posts",
+    "web_search",
 ]

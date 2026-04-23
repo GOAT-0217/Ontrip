@@ -8,9 +8,9 @@ class Config:
     OPENAI_API_KEY: str = environ.get("OPENAI_API_KEY")
     OPENAI_BASE_URL: str = environ.get("OPENAI_BASE_URL", "")
     
-    # Separate embedding API configuration
     EMBEDDING_API_KEY: str = environ.get("EMBEDDING_API_KEY", environ.get("OPENAI_API_KEY"))
-    EMBEDDING_BASE_URL: str = environ.get("EMBEDDING_BASE_URL", "https://api.openai.com/v1")
+    EMBEDDING_BASE_URL: str = environ.get("EMBEDDING_BASE_URL", "https://api.siliconflow.cn/v1")
+    EMBEDDING_MODEL: str = environ.get("EMBEDDING_MODEL", "BAAI/bge-m3")
     
     # Local embedding configuration
     USE_LOCAL_EMBEDDINGS: bool = environ.get("USE_LOCAL_EMBEDDINGS", "false").lower() == "true"

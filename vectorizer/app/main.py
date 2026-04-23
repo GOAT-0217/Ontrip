@@ -1,3 +1,5 @@
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 from vectorizer.app.core.logger import logger
 from vectorizer.app.vectordb.vectordb import VectorDB
 from vectorizer.app.core.settings import get_settings

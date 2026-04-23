@@ -119,11 +119,10 @@ def handle_tool_error(state) -> dict:
     tool_calls = state["messages"][-1].tool_calls
     return {
         "messages": [
-            {
-                "type": "tool",
-                "content": f"Error: {repr(error)}\nPlease fix your mistakes.",
-                "tool_call_id": tc["id"],
-            }
+            ToolMessage(
+                content=f"Error: {repr(error)}\nPlease fix your mistakes.",
+                tool_call_id=tc["id"],
+            )
             for tc in tool_calls
         ]
     }
@@ -157,7 +156,15 @@ def get_qdrant_client():
         logger.error(f"Failed to connect to Qdrant server at {settings.QDRANT_URL}. Error: {str(e)}")
         raise
 
-def flight_info_to_string(flight_info: List[Dict]) -> str:
+def flight_info_to_string(flight_info) -> str:
+    if isinstance(flight_info, str):
+        if flight_info and "No flight information" not in flight_info and "Error fetching" not in flight_info:
+            return f"User current booked flight(s) details:\n{flight_info}"
+        return f"No current flights found."
+    
+    if not flight_info or not isinstance(flight_info, list):
+        return "No current flights found."
+    
     info_lines = [] 
     i = 0
     for flight in flight_info:
@@ -176,6 +183,5 @@ def flight_info_to_string(flight_info: List[Dict]) -> str:
         )
         info_lines.append(line)
 
-    info_lines = f"User current booked flight(s) details:\n" + "\n".join(info_lines)
-
-    return "\n".join(info_lines)
+    result = "User current booked flight(s) details:\n" + "\n".join(info_lines)
+    return result

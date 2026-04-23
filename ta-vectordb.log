@@ -1362,3 +1362,677 @@ OSError: Can't load the model for 'sentence-transformers/paraphrase-multilingual
 2026-04-12 18:41:00,100 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 401 - Api key is invalid
 2026-04-12 19:14:17,401 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 401 - Api key is invalid
 2026-04-12 20:07:10,469 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 401 - Api key is invalid
+2026-04-20 17:35:19,836 - vectorizer.app.core.logger - ERROR - All 7 embedding models failed.
+2026-04-20 17:35:19,837 - vectorizer.app.core.logger - ERROR - Embedding API connection failed. Please check your configuration.
+2026-04-20 17:35:19,837 - vectorizer.app.core.logger - ERROR - See EMBEDDING_SETUP.md for configuration instructions.
+2026-04-20 17:58:35,826 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 401 - Api key is invalid
+2026-04-20 17:59:08,442 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 401 - Api key is invalid
+2026-04-20 17:59:12,553 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 401 - Api key is invalid
+2026-04-20 19:36:14,170 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: UnexpectedResponse: Unexpected Response: 502 (Bad Gateway)
+Raw response content:
+b''
+2026-04-20 19:36:46,072 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: UnexpectedResponse: Unexpected Response: 502 (Bad Gateway)
+Raw response content:
+b''
+2026-04-20 19:36:56,707 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: UnexpectedResponse: Unexpected Response: 502 (Bad Gateway)
+Raw response content:
+b''
+2026-04-20 19:37:08,907 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: UnexpectedResponse: Unexpected Response: 502 (Bad Gateway)
+Raw response content:
+b''
+2026-04-20 19:37:20,526 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: UnexpectedResponse: Unexpected Response: 502 (Bad Gateway)
+Raw response content:
+b''
+2026-04-20 19:37:43,152 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: UnexpectedResponse: Unexpected Response: 502 (Bad Gateway)
+Raw response content:
+b''
+2026-04-20 19:38:04,320 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: UnexpectedResponse: Unexpected Response: 502 (Bad Gateway)
+Raw response content:
+b''
+2026-04-20 19:38:18,245 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: UnexpectedResponse: Unexpected Response: 502 (Bad Gateway)
+Raw response content:
+b''
+2026-04-20 20:58:29,314 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,314 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,328 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,328 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,334 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,334 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,334 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,334 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,334 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,334 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,337 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,337 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,338 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,344 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,344 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,345 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,345 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,346 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,346 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,346 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,346 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,350 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,350 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,351 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,351 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,351 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,351 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,351 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,351 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,354 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,354 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,355 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,355 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,356 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,356 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,357 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,357 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,369 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:29,369 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,367 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,367 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,370 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,374 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,374 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,405 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,405 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,405 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,405 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,406 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,406 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,406 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,406 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,406 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,407 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,407 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,407 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,408 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,408 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,408 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,408 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,409 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,409 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,409 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,409 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,410 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,410 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,410 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,410 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,410 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:30,410 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,421 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,421 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,429 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,431 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,432 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,432 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,490 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,490 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,491 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,492 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,493 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:32,493 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,455 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,455 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,486 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,486 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,489 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,489 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,489 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,489 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,489 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,489 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,494 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,496 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,496 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,496 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,528 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,528 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,530 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,530 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,530 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,530 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,530 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,530 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,530 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,530 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,531 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,531 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,531 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,531 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,531 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,531 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,532 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,532 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,532 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,532 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,532 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,532 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,533 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:36,533 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,509 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,510 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,510 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,510 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1261): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,511 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,511 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,511 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,511 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1664): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,512 - vectorizer.app.core.logger - ERROR - 💥 Error during embedding generation: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,512 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,512 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,512 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,512 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1812): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,512 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,512 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,512 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1566): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 19): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,513 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1014): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,517 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,517 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,517 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1115): Server disconnected
+2026-04-20 20:58:44,517 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,517 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,517 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1853): Server disconnected
+2026-04-20 20:58:44,518 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,518 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,518 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1683): Server disconnected
+2026-04-20 20:58:44,518 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,518 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,518 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 679): Server disconnected
+2026-04-20 20:58:44,518 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,519 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,519 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 2000): Server disconnected
+2026-04-20 20:58:44,519 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,519 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,519 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1201): Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 27): Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 2000): Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1474): Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 714): Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Error in attempt 5: ServerDisconnectedError: Server disconnected
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:58:44,520 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 1689): Server disconnected
+2026-04-20 20:58:44,521 - vectorizer.app.core.logger - ERROR - ❌ An error occurred while processing faq: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:44,521 - vectorizer.app.core.logger - ERROR - Detailed error information:
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\多智能体旅行AI助手\ontrip-main\vectorizer\app\main.py", line 48, in create_collections
+    vectordb.create_embeddings()
+  File "C:\Users\Administrator\Desktop\多智能体旅行AI助手\ontrip-main\vectorizer\app\vectordb\vectordb.py", line 566, in create_embeddings
+    asyncio.run(self.create_embeddings_async())
+  File "D:\Anaconda3\envs\ontrip\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "D:\Anaconda3\envs\ontrip\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Anaconda3\envs\ontrip\Lib\asyncio\base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\多智能体旅行AI助手\ontrip-main\vectorizer\app\vectordb\vectordb.py", line 254, in create_embeddings_async
+    await self.index_faq_docs()
+  File "C:\Users\Administrator\Desktop\多智能体旅行AI助手\ontrip-main\vectorizer\app\vectordb\vectordb.py", line 540, in index_faq_docs
+    points = await tqdm_asyncio.gather(*tasks, desc="Generating embeddings for FAQ documents")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Anaconda3\envs\ontrip\Lib\site-packages\tqdm\asyncio.py", line 79, in gather
+    res = [await f for f in cls.as_completed(ifs, loop=loop, timeout=timeout,
+           ^^^^^^^
+  File "D:\Anaconda3\envs\ontrip\Lib\asyncio\tasks.py", line 631, in _wait_for_one
+    return f.result()  # May raise f.exception().
+           ^^^^^^^^^^
+  File "D:\Anaconda3\envs\ontrip\Lib\site-packages\tqdm\asyncio.py", line 76, in wrap_awaitable
+    return i, await f
+              ^^^^^^^
+  File "C:\Users\Administrator\Desktop\多智能体旅行AI助手\ontrip-main\vectorizer\app\vectordb\vectordb.py", line 230, in process_chunk
+    embedding = await self.generate_embedding_async(chunk, session)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\多智能体旅行AI助手\ontrip-main\vectorizer\app\vectordb\vectordb.py", line 186, in generate_embedding_async
+    raise Exception(f"HTTP {response.status}: {error_text}")
+Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,708 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,708 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,725 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,725 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,731 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,731 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,732 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,733 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,734 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,734 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,741 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:45,741 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,760 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,761 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,781 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,781 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,783 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,783 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,784 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,785 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,786 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,786 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,787 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:46,788 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,810 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,810 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,839 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,840 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,840 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,840 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,842 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,843 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,843 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,843 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,845 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:48,845 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,836 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,837 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,874 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,874 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,874 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,874 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,898 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,898 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,902 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,902 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,902 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:58:52,902 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,884 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,884 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,884 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 268): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 268): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:00,885 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 268): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,886 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,886 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,886 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,926 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,926 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,926 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:00,926 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 268): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,926 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,927 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,927 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,927 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:00,927 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 268): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,927 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,931 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,931 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,931 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:00,931 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 268): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:00,931 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,378 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,378 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,380 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,380 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,382 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,382 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,383 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,384 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,391 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,391 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,395 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:02,395 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,428 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,428 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,428 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,428 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,428 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,428 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,428 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,428 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,430 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,430 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,430 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:03,430 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,493 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,493 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,493 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,493 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,496 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,496 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,496 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,496 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,496 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,496 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,497 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:05,497 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,550 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,550 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,551 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,551 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,551 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,551 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,552 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,552 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,553 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,553 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,557 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:09,557 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 197): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 189): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,604 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:17,605 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 200): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,605 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,605 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,605 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 190): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 192): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,606 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,607 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,607 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:17,607 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 196): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:17,607 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,822 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,822 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,831 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,831 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,834 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,835 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,835 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,835 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,835 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,835 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,859 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:18,859 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,870 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,870 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,870 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,870 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,870 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,870 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,875 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,875 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,878 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,878 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,912 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:19,912 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,936 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,937 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,937 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,937 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,937 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,937 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,949 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,949 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,949 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,949 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,974 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:21,975 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,976 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,976 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,976 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,976 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,977 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,977 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,979 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,979 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,982 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:25,982 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:26,017 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:26,017 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,021 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,021 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,021 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:34,021 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 175): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 177): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 177): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,022 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,024 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,024 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,024 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:34,024 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 177): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,024 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,030 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,030 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,030 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:34,030 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 174): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,030 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,063 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,063 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,063 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:34,063 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 181): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:34,063 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,255 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,255 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,256 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,256 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,264 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,265 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,269 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,269 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,275 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,276 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,280 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,280 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,280 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,280 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,289 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:35,291 - vectorizer.app.core.logger - ERROR - Error in attempt 1: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,314 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,314 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,315 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,315 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,317 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,317 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,317 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,317 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,323 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,323 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,332 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,332 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,333 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,333 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,350 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:36,350 - vectorizer.app.core.logger - ERROR - Error in attempt 2: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,361 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,361 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,361 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,361 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,361 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,361 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,364 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,364 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,368 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,368 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,379 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,379 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,381 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,381 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,402 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:38,403 - vectorizer.app.core.logger - ERROR - Error in attempt 3: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,420 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,420 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,420 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,420 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,420 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,420 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,421 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,421 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,423 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,423 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,424 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,424 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,424 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,424 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,427 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:42,427 - vectorizer.app.core.logger - ERROR - Error in attempt 4: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,454 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,454 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,454 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:50,454 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 281): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,454 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 273): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 273): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,455 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,476 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,476 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,476 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:50,476 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 267): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,476 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,478 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,478 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,478 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:50,478 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 249): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,478 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 240): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 305): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,479 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,483 - vectorizer.app.core.logger - ERROR - HTTP Error 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,483 - vectorizer.app.core.logger - ERROR - Error in attempt 5: Exception: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,483 - vectorizer.app.core.logger - ERROR - Failed to generate embedding after 5 attempts
+2026-04-20 20:59:50,483 - vectorizer.app.core.logger - ERROR - Failed to process chunk (length: 249): HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 20:59:50,483 - vectorizer.app.core.logger - ERROR - ❌ Error processing chunk: HTTP 400: {"code":20012,"message":"Model does not exist. Please check it carefully.","data":null}
+2026-04-20 21:26:50,521 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 400 - {'code': 20012, 'message': 'Model does not exist. Please check it carefully.', 'data': None}
+2026-04-20 21:39:31,892 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 400 - {'code': 20012, 'message': 'Model does not exist. Please check it carefully.', 'data': None}
+2026-04-20 21:43:24,642 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 400 - {'code': 20012, 'message': 'Model does not exist. Please check it carefully.', 'data': None}
+2026-04-20 21:43:24,645 - vectorizer.app.core.logger - ERROR - sentence-transformers not installed. Install with: pip install sentence-transformers
+2026-04-20 21:43:24,645 - vectorizer.app.core.logger - ERROR - Error generating local embeddings: No module named 'sentence_transformers'
+2026-04-20 21:43:24,645 - vectorizer.app.core.logger - ERROR - Local embedding fallback also failed: No module named 'sentence_transformers'
+2026-04-20 21:44:29,351 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 400 - {'code': 20012, 'message': 'Model does not exist. Please check it carefully.', 'data': None}
+2026-04-20 21:44:29,351 - vectorizer.app.core.logger - ERROR - sentence-transformers not installed. Install with: pip install sentence-transformers
+2026-04-20 21:44:29,351 - vectorizer.app.core.logger - ERROR - Error generating local embeddings: No module named 'sentence_transformers'
+2026-04-20 21:44:29,351 - vectorizer.app.core.logger - ERROR - Local embedding fallback also failed: No module named 'sentence_transformers'
+2026-04-20 21:44:33,887 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 400 - {'code': 20012, 'message': 'Model does not exist. Please check it carefully.', 'data': None}
+2026-04-20 21:44:33,888 - vectorizer.app.core.logger - ERROR - sentence-transformers not installed. Install with: pip install sentence-transformers
+2026-04-20 21:44:33,888 - vectorizer.app.core.logger - ERROR - Error generating local embeddings: No module named 'sentence_transformers'
+2026-04-20 21:44:33,888 - vectorizer.app.core.logger - ERROR - Local embedding fallback also failed: No module named 'sentence_transformers'
+2026-04-20 21:44:37,480 - vectorizer.app.core.logger - ERROR - API embedding failed: Error code: 400 - {'code': 20012, 'message': 'Model does not exist. Please check it carefully.', 'data': None}
+2026-04-20 21:44:37,480 - vectorizer.app.core.logger - ERROR - sentence-transformers not installed. Install with: pip install sentence-transformers
+2026-04-20 21:44:37,480 - vectorizer.app.core.logger - ERROR - Error generating local embeddings: No module named 'sentence_transformers'
+2026-04-20 21:44:37,480 - vectorizer.app.core.logger - ERROR - Local embedding fallback also failed: No module named 'sentence_transformers'
+2026-04-23 13:22:05,234 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: ResponseHandlingException: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+2026-04-23 13:25:20,795 - vectorizer.app.core.logger - ERROR - ❌ Failed to connect to Qdrant at http://localhost:6333: ResponseHandlingException: [WinError 10061] 由于目标计算机积极拒绝，无法连接。

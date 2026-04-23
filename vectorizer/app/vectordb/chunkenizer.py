@@ -1,4 +1,7 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+try:
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+except ImportError:
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 def recursive_character_splitting(text, chunk_size=300, chunk_overlap=20):
     text_splitter = RecursiveCharacterTextSplitter(

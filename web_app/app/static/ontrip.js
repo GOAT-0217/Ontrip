@@ -109,6 +109,20 @@ function displayOperationLog(logEntries) {
 
 function clearOperationLog() { fetchOperationLog(); }
 
+async function startNewChat() {
+    try {
+        const response = await fetch('/new-chat', { method: 'POST' });
+        const data = await response.json();
+        if (data.session_id) {
+            chatMessages.innerHTML = '';
+            operationLogContent.innerHTML = '<div class="log-entry">暂无日志</div>';
+            addMessage('assistant', '已开始新对话，有什么可以帮您的？');
+        }
+    } catch (error) {
+        addMessage('assistant', '创建新对话失败，请刷新页面重试');
+    }
+}
+
 sendBtn.addEventListener('click', sendMessage);
 userInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
 setInterval(checkPendingAction, 5000);

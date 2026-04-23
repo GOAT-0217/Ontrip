@@ -1,0 +1,33 @@
+{
+  "session_id": "f8fbdda5-01a8-4bf8-ae71-0625413fe4d2",
+  "chat_history": [
+    {
+      "timestamp": "2026-04-20T21:43:53.873010",
+      "user_message": "Search flights from Shanghai to Chongqing",
+      "ai_response": "I understand you're looking to search for flights from Shanghai to Chongqing. For flight search and booking operations, I need to transfer you to our specialized flight booking assistant who can help you find available flights, compare options, and make reservations."
+    }
+  ],
+  "pending_action": null,
+  "user_decision": null,
+  "operation_log": [
+    {
+      "type": "user_input",
+      "title": "User Message",
+      "content": "Search flights from Shanghai to Chongqing",
+      "timestamp": "2026-04-20T21:43:45.141082"
+    },
+    {
+      "type": "ai_response",
+      "title": "AI Response",
+      "content": "I understand you're looking to search for flights from Shanghai to Chongqing. For flight search and booking operations, I need to transfer you to our specialized flight booking assistant who can help you find available flights, compare options, and make reservations.",
+      "timestamp": "2026-04-20T21:43:53.798053"
+    },
+    {
+      "type": "error",
+      "title": "Processing Error",
+      "content": "Error code: 400 - {'error': {'message': \"An assistant message with 'tool_calls' must be followed by tool messages responding to each 'tool_call_id'. (insufficient tool messages following tool_calls message)\", 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}",
+      "timestamp": "2026-04-20T21:43:53.872224"
+    }
+  ],
+  "created_at": "2026-04-20T21:43:45.136213"
+}

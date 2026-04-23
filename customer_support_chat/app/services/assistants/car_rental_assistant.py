@@ -5,6 +5,7 @@ from customer_support_chat.app.services.tools import (
     book_car_rental,
     update_car_rental,
     cancel_car_rental,
+    estimate_didi_ride,
 )
 from customer_support_chat.app.services.assistants.assistant_base import Assistant, CompleteOrEscalate, llm
 
@@ -13,9 +14,10 @@ car_rental_prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            "You are a specialized assistant for handling car rental bookings. "
-            "The primary assistant delegates work to you whenever the user needs help booking a car rental. "
+            "You are a specialized assistant for handling car rental and ride-hailing bookings. "
+            "The primary assistant delegates work to you whenever the user needs help booking a car rental or getting a ride. "
             "Search for available car rentals based on the user's preferences and confirm the booking details with the customer. "
+            "For ride-hailing (打车/叫车), use the estimate_didi_ride tool to get real-time price estimates from DiDi (滴滴出行). "
             "When searching, be persistent. Expand your query bounds if the first search returns no results. "
             "If you need more information or the customer changes their mind, escalate the task back to the main assistant. "
             "Remember that a booking isn't completed until after the relevant tool has successfully been used."
@@ -34,7 +36,7 @@ car_rental_prompt = ChatPromptTemplate.from_messages(
 ).partial(time=datetime.now())
 
 # Car rental tools
-book_car_rental_safe_tools = [search_car_rentals, CompleteOrEscalate]
+book_car_rental_safe_tools = [search_car_rentals, estimate_didi_ride, CompleteOrEscalate]
 book_car_rental_sensitive_tools = [book_car_rental, update_car_rental, cancel_car_rental]
 book_car_rental_tools = book_car_rental_safe_tools + book_car_rental_sensitive_tools
 

@@ -418,12 +418,18 @@ def route_primary_assistant(state: State) -> Literal[
   "enter_blog_search", # New route
   "__end__",
 ]:
+  from langgraph.prebuilt import tools_condition
+  from customer_support_chat.app.core.logger import logger
+
   route = tools_condition(state)
+  logger.info(f"route_primary_assistant: tools_condition returned: {route}")
   if route == END:
       return END
   tool_calls = state["messages"][-1].tool_calls
+  logger.info(f"route_primary_assistant: last message tool_calls: {tool_calls}")
   if tool_calls:
       tool_name = tool_calls[0]["name"]
+      logger.info(f"route_primary_assistant: tool_name = {tool_name}, ToFlightBookingAssistant.__name__ = {ToFlightBookingAssistant.__name__}")
       if tool_name == ToFlightBookingAssistant.__name__:
           return "enter_update_flight"
       elif tool_name == ToBookCarRental.__name__:
@@ -440,6 +446,7 @@ def route_primary_assistant(state: State) -> Literal[
           return "enter_blog_search"
       else:
           return "primary_assistant_tools"
+  logger.info(f"route_primary_assistant: no tool_calls, returning primary_assistant")
   return "primary_assistant"
 
 builder.add_conditional_edges(

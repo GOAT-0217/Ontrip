@@ -24,7 +24,7 @@ def load_user_data(session_id: str) -> Dict[str, Any]:
         return {}
     
     try:
-        with open(user_file, "r") as f:
+        with open(user_file, "r", encoding="utf-8") as f:
             return json.load(f)
     except (json.JSONDecodeError, FileNotFoundError):
         return {}
@@ -32,8 +32,8 @@ def load_user_data(session_id: str) -> Dict[str, Any]:
 def save_user_data(session_id: str, data: Dict[str, Any]):
     """Save user data to the individual JSON file."""
     user_file = get_user_data_file(session_id)
-    with open(user_file, "w") as f:
-        json.dump(data, f, indent=2)
+    with open(user_file, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 def get_user_session(session_id: str) -> Dict[str, Any]:
     """Get a user session by session ID, creating a new one if it doesn't exist."""
@@ -171,3 +171,9 @@ def clear_operation_log(session_id: str):
     if user_data:
         user_data["operation_log"] = []
         save_user_data(session_id, user_data)
+
+def clear_session_data(session_id: str):
+    """Clear all session data (used when starting a new chat)."""
+    user_file = get_user_data_file(session_id)
+    if os.path.exists(user_file):
+        os.remove(user_file)
