@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>登录 · Ontrip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('/static/ontrip.png') center/cover no-repeat fixed;
+            color: #fff;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 0;
+        }
+        .auth-card {
+            position: relative;
+            z-index: 1;
+            width: 400px;
+            max-width: 90vw;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 36px;
+            padding: 48px 40px 40px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+        }
+        .auth-logo {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 16px;
+        }
+        .auth-title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .auth-subtitle {
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 6px;
+            margin-bottom: 32px;
+        }
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 6px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .form-group input:focus {
+            border-color: rgba(59, 130, 246, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .form-group input::placeholder { color: rgba(255, 255, 255, 0.25); }
+        .auth-btn {
+            width: 100%;
+            padding: 13px 0;
+            margin-top: 8px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #3b82f6, #2563eb);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .auth-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35); }
+        .auth-btn:active { transform: translateY(0); }
+        .auth-error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 18px;
+            color: #fca5a5;
+            font-size: 0.82rem;
+            text-align: center;
+        }
+        .auth-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+        .auth-link a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .auth-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="auth-card">
+        <div class="auth-logo">✈️</div>
+        <div class="auth-title">Ontrip</div>
+        <div class="auth-subtitle">登录您的旅行助手</div>
+
+        {% if error %}
+        <div class="auth-error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="/login">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" placeholder="请输入用户名" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" placeholder="请输入密码" required>
+            </div>
+            <button type="submit" class="auth-btn">登 录</button>
+        </form>
+
+        <div class="auth-link">
+            还没有账号？<a href="/register">立即注册</a>
+        </div>
+    </div>
+</body>
+</html>

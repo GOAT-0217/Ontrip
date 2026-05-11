@@ -25,8 +25,17 @@ _cars_vectordb = None
 _cars_orchestrator = None
 
 def _get_cars_vectordb():
+    """
+    获取汽车租赁向量数据库的单例实例（懒加载模式）。
+
+    首次调用时初始化VectorDB连接，后续调用直接返回缓存的全局实例。
+
+    Returns:
+        VectorDB or None: VectorDB实例对象，如果初始化失败则返回None
+    """
     global _cars_vectordb
     if _cars_vectordb is None:
+        #  延迟初始化VectorDB实例，捕获异常避免程序崩溃
         try:
             _cars_vectordb = VectorDB(table_name="car_rentals", collection_name="car_rentals_collection")
         except Exception as e:
@@ -36,10 +45,21 @@ def _get_cars_vectordb():
     return _cars_vectordb
 
 def _get_cars_orchestrator():
+    """
+    获取汽车租赁检索编排器的单例实例（懒加载模式）。
+
+    首次调用时基于向量数据库创建RetrievalOrchestrator，配置混合检索、
+    重排序和查询重写等功能，后续调用直接返回缓存的全局实例。
+
+    Returns:
+        RetrievalOrchestrator or None: 检索编排器实例对象，如果向量数据库未初始化则返回None
+    """
     global _cars_orchestrator
+    # 依赖向量数据库实例，仅在其成功初始化后创建编排器
     if _cars_orchestrator is None:
         vdb = _get_cars_vectordb()
         if vdb is not None:
+            # 配置混合检索策略：向量权重0.7 + 关键词权重0.3，启用重排序和查询重写
             _cars_orchestrator = RetrievalOrchestrator(
                 vectordb=vdb,
                 table_name="car_rentals",
@@ -57,6 +77,18 @@ def _get_cars_orchestrator():
     return _cars_orchestrator
 
 def _format_car_results(results: List[RetrievalResult]) -> str:
+    """
+    将汽车租赁检索结果格式化为可读的字符串。
+
+    遍历检索结果列表，提取每辆车的名称、位置、价格区间、租期状态等信息，
+    并标注数据来源（如向量检索或关键词检索）。
+
+    Args:
+        results (List[RetrievalResult]): 检索结果列表，每个结果包含车辆租赁信息
+
+    Returns:
+        str: 格式化后的车辆信息字符串，每条记录占一行；若无结果则返回空字符串
+    """
     rentals = []
     for r in results:
         payload = r.payload
@@ -70,11 +102,25 @@ def _format_car_results(results: List[RetrievalResult]) -> str:
     return "\n".join(rentals) if rentals else ""
 
 def _parse_ride_query(query: str) -> Dict[str, str]:
+    """
+    从打车/出行相关的自然语言查询中解析起点和终点信息。
+
+    使用正则表达式匹配常见的中文出行表达模式（如"从A到B"、"A去B打车"等），
+    提取起点和终点名称，其他字段（经纬度）保持为空待后续填充。
+
+    Args:
+        query (str): 用户的打车查询语句，例如"从北京站到上海虹桥多少钱"
+
+    Returns:
+        Dict[str, str]: 包含解析结果的字典，键包括from_name、to_name及经纬度字段，
+                        未匹配到的字段值为空字符串
+    """
     result = {"from_name": "", "to_name": "", "from_lng": "", "from_lat": "", "to_lng": "", "to_lat": ""}
     patterns = [
         r'从(.+?)(?:到|去|至|→)(.+?)(?:的|打车|叫车|滴滴|出行|专车|快车|顺风车|多少钱|报价|估价|$)',
         r'(.+?)(?:到|去|至|→)(.+?)(?:打车|叫车|滴滴|出行|专车|快车|顺风车|多少钱|报价|估价)',
     ]
+    # 尝试多种正则模式匹配，提取起点和终点信息
     for pattern in patterns:
         match = re.search(pattern, query)
         if match:
@@ -88,8 +134,23 @@ async def search_car_rentals(
     query: str,
     limit: int = 5,
 ) -> str:
+    """
+    基于自然语言查询搜索汽车租赁或网约车服务。
+
+    优先使用滴滴出行MCP API获取实时打车估价，若失败则回退到本地向量检索。
+    支持解析起点和终点信息，调用地理编码服务获取坐标，并估算行程费用。
+
+    Args:
+        query (str): 用户的自然语言查询，例如"从北京站到机场打车多少钱"
+        limit (int): 返回结果的最大数量限制（默认5条）
+
+    Returns:
+        str: 格式化的搜索结果字符串，包含车辆信息或打车估价；
+             若无匹配结果或发生错误则返回相应提示信息
+    """
     """Search for car rentals / ride-hailing based on a natural language query. Supports DiDi MCP API (滴滴出行) for real-time ride estimates, with fallback to local vector search."""
     try:
+        # 优先尝试使用滴滴MCP API进行实时打车估价
         didi_client = get_didi_client()
         if didi_client.is_configured():
             try:
@@ -105,7 +166,7 @@ async def search_car_rentals(
                     from_lat = ""
                     to_lng = ""
                     to_lat = ""
-
+                    # 从滴滴API响应中提取出发地经纬度坐标
                     if isinstance(from_data, dict):
                         loc = from_data.get("location", from_data.get("geometry", {}))
                         if isinstance(loc, dict):
@@ -119,7 +180,7 @@ async def search_car_rentals(
                                 if isinstance(loc, dict):
                                     from_lng = str(loc.get("lng", loc.get("lon", "")))
                                     from_lat = str(loc.get("lat", ""))
-
+                    # 从滴滴API响应中提取目的地经纬度坐标
                     if isinstance(to_data, dict):
                         loc = to_data.get("location", to_data.get("geometry", {}))
                         if isinstance(loc, dict):
@@ -133,7 +194,7 @@ async def search_car_rentals(
                                 if isinstance(loc, dict):
                                     to_lng = str(loc.get("lng", loc.get("lon", "")))
                                     to_lat = str(loc.get("lat", ""))
-
+                    # 坐标解析成功后调用估价接口，失败则返回友好提示
                     if from_lng and from_lat and to_lng and to_lat:
                         estimate_result = didi_client.estimate_ride(
                             from_lng=from_lng,
@@ -155,6 +216,7 @@ async def search_car_rentals(
                 from customer_support_chat.app.core.logger import logger
                 logger.warning(f"滴滴MCP查询失败，回退到本地检索: {e}")
 
+        # 滴滴API不可用时，回退到本地向量检索编排器
         orchestrator = _get_cars_orchestrator()
         if orchestrator is not None:
             results = await orchestrator.search(query, limit=limit)
@@ -163,6 +225,7 @@ async def search_car_rentals(
                 return formatted
             return f"No car rentals found matching query: {query}"
 
+        # 最后降级方案：直接使用VectorDB进行基础检索
         vdb = _get_cars_vectordb()
         if vdb is None:
             return "VectorDB not available (Qdrant not running)."

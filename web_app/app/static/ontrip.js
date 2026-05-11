@@ -129,3 +129,7 @@ setInterval(checkPendingAction, 5000);
 setInterval(fetchOperationLog, 8000);
 fetchOperationLog();
 userInput.focus();
+
+function logout() {
+    window.location.href = '/logout';
+}

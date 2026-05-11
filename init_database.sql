@@ -97,3 +97,11 @@ CREATE INDEX idx_car_rentals_location ON car_rentals(location);
 CREATE INDEX idx_car_rentals_booked ON car_rentals(booked);
 CREATE INDEX idx_trip_recommendations_location ON trip_recommendations(location);
 CREATE INDEX idx_trip_recommendations_booked ON trip_recommendations(booked);
+
+-- Create users table for authentication (IF NOT EXISTS to preserve data on re-runs)
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);

@@ -88,17 +88,17 @@ primary_assistant_prompt = ChatPromptTemplate.from_messages(
 
 # Primary assistant tools
 primary_assistant_tools = [
-    lookup_policy,
-    web_search,
-    ToFlightBookingAssistant,
-    ToBookCarRental,
-    ToHotelBookingAssistant,
-    ToBookExcursion,
+    lookup_policy, # 退改签、行李、退款规定等
+    web_search,     # 推荐、建议、有什么好的、哪里的地方等
+    ToFlightBookingAssistant, # 航班查询、改签、退票、订票、实时航班、航班状态等
+    ToBookCarRental,        # 租车、打车
+    ToHotelBookingAssistant,     # 酒店查询、修改、取消
+    ToBookExcursion,        # 出行推荐、其他行程预订
     # New tools for delegation
-    ToWooCommerceProducts,
-    ToWooCommerceOrders,
-    ToFormSubmission,
-    ToBlogSearch,
+    ToWooCommerceProducts,  # 产品查询
+    ToWooCommerceOrders,     # 订单查询
+    ToFormSubmission,        # 表单提交
+    ToBlogSearch,            # 博客搜索
 ]
 
 # Create the primary assistant runnable

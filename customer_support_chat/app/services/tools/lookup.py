@@ -24,6 +24,14 @@ _faq_vectordb = None
 _faq_orchestrator = None
 
 def _get_faq_vectordb():
+    """
+    获取常见问题解答（FAQ）向量数据库的单例实例（懒加载模式）。
+
+    首次调用时初始化VectorDB连接并记录成功日志，后续调用直接返回缓存的全局实例。
+
+    Returns:
+        VectorDB or None: VectorDB实例对象，如果初始化失败则返回None
+    """
     global _faq_vectordb
     if _faq_vectordb is None:
         try:
@@ -35,10 +43,21 @@ def _get_faq_vectordb():
     return _faq_vectordb
 
 def _get_faq_orchestrator():
+    """
+    获取常见问题解答（FAQ）检索编排器的单例实例（懒加载模式）。
+
+    首次调用时基于向量数据库创建RetrievalOrchestrator，配置以向量检索为主（权重0.8）、
+    关键词检索为辅（权重0.2）的混合策略，并启用重排序和查询重写功能。
+
+    Returns:
+        RetrievalOrchestrator or None: 检索编排器实例对象，如果向量数据库未初始化则返回None
+    """
     global _faq_orchestrator
     if _faq_orchestrator is None:
+        # 依赖向量数据库实例，仅在其成功初始化后创建编排器
         vdb = _get_faq_vectordb()
         if vdb is not None:
+            # 配置FAQ专用检索策略：高向量权重、低关键词权重，禁用混合检索以提升精准度
             _faq_orchestrator = RetrievalOrchestrator(
                 vectordb=vdb,
                 table_name="faq",

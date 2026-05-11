@@ -8,6 +8,12 @@ from typing import List, Dict
 
 settings = get_settings()
 
+""""
+该函数实现博客文章搜索功能：
+    1.构建搜索请求：使用关键词调用WordPress API，支持WooCommerce认证
+    2.解析响应：提取标题、日期、链接和摘要，按限制数量返回
+    3.异常处理：捕获HTTP错误和其他异常，返回友好提示信
+"""
 @tool
 def search_blog_posts(keyword: str, limit: int = 5) -> str:
     """Search for blog posts based on a keyword.

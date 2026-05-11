@@ -76,9 +76,19 @@ class Assistant:
         self.runnable = runnable
 
     def __call__(self, state: State, config: Optional[RunnableConfig] = None):
+        """
+        执行助手的核心调用逻辑，处理消息状态并调用底层可运行对象。
+
+        该方法负责：
+        1. 检测并修复孤立的消息（有tool_calls但缺少对应的tool_call_id）
+        2. 循环调用runnable直到获得有效输出
+        3. 处理工具调用相关的异常情况并重试
+
+        """
         msgs = state.get("messages", [])
         logger.info(f"=== Assistant.__call__: {len(msgs)} messages in state ===")
 
+        # 检测消息列表中是否存在孤立的工具调用（有tool_calls但无tool_call_id）
         has_orphaned = False
         for i, m in enumerate(msgs):
             tc = hasattr(m, 'tool_calls') and m.tool_calls
@@ -89,12 +99,14 @@ class Assistant:
             if tc and not tid:
                 has_orphaned = True
 
+        # 如果检测到孤立工具调用，立即修复消息序列
         if has_orphaned:
             logger.warning("Detected potentially orphaned tool_calls, fixing message sequence")
             msgs = _fix_orphaned_tool_calls(msgs)
             state = {**state, "messages": msgs}
 
         try:
+            # 循环调用runnable，直到获得包含实际内容或有效工具调用的响
             while True:
                 result = self.runnable.invoke(state, config)
 
@@ -109,6 +121,8 @@ class Assistant:
                     break
         except Exception as e:
             error_str = str(e)
+
+            # 捕获工具调用顺序错误，尝试修复后重试
             if "tool_calls must be followed by tool messages" in error_str or \
                "insufficient tool messages following tool_calls" in error_str:
                 logger.warning(f"Caught tool_calls error: {error_str[:200]}")

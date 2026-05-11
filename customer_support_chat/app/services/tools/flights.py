@@ -22,6 +22,7 @@ _flights_vectordb = None
 def _get_flights_vectordb():
     global _flights_vectordb
     if _flights_vectordb is None:
+        # 延迟初始化VectorDB实例，捕获异常避免程序崩溃
         try:
             _flights_vectordb = VectorDB(table_name="flights", collection_name="flights_collection")
         except Exception as e:
@@ -33,13 +34,28 @@ def _get_flights_vectordb():
 
 @tool
 def fetch_user_flight_information(*, config: RunnableConfig) -> str:
-    """Fetch all tickets for the user along with corresponding flight information and seat assignments."""
+    """
+    获取指定乘客的所有机票信息及对应的航班详情和座位分配。
+
+    通过连接SQLite数据库，联查tickets、flights、ticket_flights及boarding_passes表，
+    提取航班号、起降时间、座位号及舱位等级等关键信息并格式化返回。
+
+    Args:
+        config (RunnableConfig): 运行配置对象，需包含configurable字典，
+                                 其中应提供passenger_id用于查询
+
+    Returns:
+        str: 格式化后的航班信息列表，每条记录包含票务、航班时刻及座位详情；
+             若未提供乘客ID或无相关数据则返回相应提示
+    """
     try:
+        # 从配置中提取乘客ID，若缺失则直接返回错误提示
         configuration = config.get("configurable", {})
         passenger_id = configuration.get("passenger_id", None)
         if not passenger_id:
             return "No passenger ID configured."
 
+        # 执行多表联查，获取机票、航班及座位信息
         conn = sqlite3.connect(db)
         cursor = conn.cursor()
 
@@ -64,6 +80,7 @@ def fetch_user_flight_information(*, config: RunnableConfig) -> str:
         cursor.close()
         conn.close()
 
+        # 处理查询结果，格式化为易读的字符串输出
         if not results:
             return f"No flight information found for passenger {passenger_id}."
         
@@ -85,11 +102,25 @@ def search_flights(
     query: str,
     limit: int = 2,
 ) -> str:
-    """Search for flights based on a natural language query."""
+    """
+    基于自然语言查询搜索航班信息。
+
+    利用向量数据库进行语义检索，提取航班号、起降机场、时间及状态等关键信息并格式化返回。
+
+    Args:
+        query (str): 用户的自然语言查询，例如"明天早上从北京飞往上海的航班"
+        limit (int): 返回结果的最大数量限制（默认2条）
+
+    Returns:
+        str: 格式化后的航班信息列表；若数据库不可用或无匹配结果则返回相应提示
+    """
     try:
+        # 获取航班向量数据库实例，若初始化失败则返回错误提示
         vdb = _get_flights_vectordb()
         if vdb is None:
             return "VectorDB not available (Qdrant not running)."
+
+        # 执行向量搜索并格式化结果为易读的字符串
         search_results = vdb.search(query, limit=limit)
 
         flights = []
@@ -112,16 +143,33 @@ def search_flights(
 async def update_ticket_to_new_flight(
     ticket_no: str, new_flight_id: int, *, config: RunnableConfig, approval_result=None
 ) -> str:
-    """Update the user's ticket to a new valid flight."""
+    """
+    将用户的机票改签到新的有效航班。
+
+    首先验证机票是否属于当前乘客，随后更新ticket_flights表中的航班ID。
+    操作成功与否将通过返回的字符串信息进行反馈。
+
+    Args:
+        ticket_no (str): 需要改签的机票编号
+        new_flight_id (int): 目标新航班的唯一标识符
+        config (RunnableConfig): 运行配置对象，需包含configurable字典，其中应提供passenger_id
+        approval_result: 可选的审批结果对象（当前逻辑中未使用）
+
+    Returns:
+        str: 改签操作的结果提示信息，包含成功确认、未找到票据或更新失败的说明
+    """
     try:
+        # 从配置中提取乘客ID以进行身份验证
         configuration = config.get("configurable", {})
         passenger_id = configuration.get("passenger_id", None)
         if not passenger_id:
             return "Error: No passenger ID configured."
 
+        # 验证机票是否存在且归属于当前乘客
         conn = sqlite3.connect(db)
         cursor = conn.cursor()
 
+        # 执行更新操作，将机票关联到新的航班ID
         cursor.execute(
             "SELECT * FROM tickets WHERE ticket_no = ? AND passenger_id = ?",
             (ticket_no, passenger_id),
@@ -138,6 +186,7 @@ async def update_ticket_to_new_flight(
         conn.commit()
 
         conn.close()
+        # 根据受影响的行数判断改签是否成功
         if cursor.rowcount > 0:
             return f"Ticket {ticket_no} successfully updated to flight {new_flight_id}."
         else:
@@ -149,16 +198,32 @@ async def update_ticket_to_new_flight(
 @tool
 @humanloop_adapter.require_approval(execute_on_reject=False)
 async def cancel_ticket(ticket_no: str, *, config: RunnableConfig, approval_result=None) -> str:
-    """Cancel the user's ticket and remove it from the database."""
+    """
+    取消用户的机票并从数据库中移除相关记录。
+
+    首先验证机票是否属于当前乘客，随后依次删除ticket_flights和tickets表中的关联数据，
+    确保数据一致性。操作结果将通过返回的字符串信息进行反馈。
+
+    Args:
+        ticket_no (str): 需要取消的机票编号
+        config (RunnableConfig): 运行配置对象，需包含configurable字典，其中应提供passenger_id
+        approval_result: 可选的审批结果对象（当前逻辑中未使用）
+
+    Returns:
+        str: 取消操作的结果提示信息，包含成功确认、未找到票据或发生错误的说明
+    """
     try:
+        # 从配置中提取乘客ID以进行身份验证
         configuration = config.get("configurable", {})
         passenger_id = configuration.get("passenger_id", None)
         if not passenger_id:
             return "Error: No passenger ID configured."
 
+        # 验证机票是否存在且归属于当前乘客
         conn = sqlite3.connect(db)
         cursor = conn.cursor()
 
+        # 执行级联删除：先删除航班关联记录，再删除主票据记录
         cursor.execute(
             "SELECT * FROM tickets WHERE ticket_no = ? AND passenger_id = ?",
             (ticket_no, passenger_id),
