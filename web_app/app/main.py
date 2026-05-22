@@ -22,9 +22,20 @@ from .core.user_data_manager import (
     set_user_decision,
     clear_pending_action,
     clear_user_decision,
-    get_operation_log
+    get_operation_log,
+    delete_user_session,
 )
-from .core.auth import authenticate_user, create_user, get_user_by_id
+from .core.auth import (
+    authenticate_user,
+    create_user,
+    get_user_by_id,
+    create_conversation,
+    list_conversations,
+    get_conversation,
+    update_conversation_title,
+    update_conversation_time,
+    delete_conversation,
+)
 
 # Load environment variables
 load_dotenv()
@@ -63,26 +74,34 @@ async def require_auth(request: Request):
 
 
 def get_session_data(request: Request):
-    """Get or create session data for the current user."""
-    session_id = request.cookies.get("session_id")
+    """Get or create session data for the current user.
+
+    Session resolution priority:
+      1. X-Session-Id header (set by frontend JS, most reliable)
+      2. ?session_id= query param (used on page load / URL sharing)
+      3. session_id cookie (fallback)
+    """
+    header_id = request.headers.get("X-Session-Id")
+    query_id = request.query_params.get("session_id")
+    cookie_id = request.cookies.get("session_id")
+    session_id = header_id or query_id or cookie_id
     if not session_id:
         session_id = str(uuid.uuid4())
-    
-    # Get the user session data
+
     session_data = get_user_session(session_id)
-    
-    # Ensure config exists in session_data
+
     if "config" not in session_data:
         session_data["config"] = {
             "thread_id": session_id,
-            "passenger_id": "5102 899977"  # Default passenger ID
+            "passenger_id": "5102 899977",
         }
-    
+
     return {
         "session_id": session_id,
         "config": session_data["config"],
-        "user_data": session_data
+        "user_data": session_data,
     }
+
 
 @app.get("/", response_class=HTMLResponse)
 async def get_chat_page(request: Request, session_data: dict = Depends(get_session_data)):
@@ -90,6 +109,11 @@ async def get_chat_page(request: Request, session_data: dict = Depends(get_sessi
     user = request.session.get("user")
     if not user:
         return RedirectResponse(url="/login", status_code=303)
+
+    # Ensure a conversation record exists for this session
+    conv = get_conversation(session_data["session_id"])
+    if not conv:
+        create_conversation(user["id"], session_data["session_id"])
 
     response = templates.TemplateResponse(request, "chat.html", {
         "session_id": session_data["session_id"],
@@ -103,34 +127,40 @@ async def get_chat_page(request: Request, session_data: dict = Depends(get_sessi
 async def chat(chat_message: ChatMessage, user: dict = Depends(require_auth), session_data: dict = Depends(get_session_data)):
     """Process a chat message and return the AI response."""
     try:
+        user_data = session_data["user_data"]
+        session_id = session_data["session_id"]
+
+        # Auto-set conversation title from first user message
+        if len(user_data.get("chat_history", [])) == 0:
+            title = chat_message.message.strip()[:30]
+            update_conversation_title(session_id, title)
+        else:
+            update_conversation_time(session_id)
+
         # Process the user message
         ai_response = await process_user_message(session_data, chat_message.message)
-        
+
         # Update the user's chat history
-        update_user_chat_history(session_data["session_id"], chat_message.message, ai_response)
-        
+        update_user_chat_history(session_id, chat_message.message, ai_response)
+
         # Return the AI response
         return JSONResponse(content={"response": ai_response})
-        
+
     except Exception as e:
-        # Log the error for debugging
         print(f"Error processing chat message: {e}")
-        # Return a user-friendly error message
         return JSONResponse(content={"error": "An unexpected error occurred. Please try again later."}, status_code=500)
 
 @app.post("/new-chat")
 async def new_chat(request: Request, user: dict = Depends(require_auth)):
     """Start a new conversation by generating a new session ID."""
-    from .core.user_data_manager import clear_session_data
-    
     new_session_id = str(uuid.uuid4())
-    
-    # Clear old session data if exists
-    old_session_id = request.cookies.get("session_id")
-    if old_session_id:
-        clear_session_data(old_session_id)
-    
-    response = JSONResponse(content={"session_id": new_session_id})
+
+    # Auto-name: count existing conversations to generate "新对话 N"
+    existing = list_conversations(user["id"])
+    title = "新对话 " + str(len(existing) + 1)
+    create_conversation(user["id"], new_session_id, title)
+
+    response = JSONResponse(content={"session_id": new_session_id, "title": title})
     response.set_cookie(key="session_id", value=new_session_id)
     return response
 
@@ -201,6 +231,75 @@ async def get_operation_log_endpoint(user: dict = Depends(require_auth), session
     except Exception as e:
         print(f"Error retrieving operation log: {e}")
         return JSONResponse(content={"error": "An unexpected error occurred. Please try again later."}, status_code=500)
+
+
+# ── Conversation management routes ──────────────────────────────────
+
+
+@app.get("/conversations")
+async def get_conversations(user: dict = Depends(require_auth)):
+    """Return all conversations for the current user."""
+    try:
+        conversations = list_conversations(user["id"])
+        return JSONResponse(content={"conversations": conversations})
+    except Exception as e:
+        print(f"Error listing conversations: {e}")
+        return JSONResponse(content={"error": "Failed to load conversations."}, status_code=500)
+
+
+@app.get("/session-data/{session_id}")
+async def get_session_data_endpoint(session_id: str, user: dict = Depends(require_auth)):
+    """Return chat history for a specific session. Verifies ownership."""
+    conv = get_conversation(session_id)
+    if not conv:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    if conv["user_id"] != user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+
+    from .core.user_data_manager import load_user_data, get_operation_log as _get_op_log
+    data = load_user_data(session_id)
+    if not data:
+        data = {"chat_history": [], "operation_log": []}
+
+    response = JSONResponse(content={
+        "session_id": session_id,
+        "chat_history": data.get("chat_history", []),
+        "operation_log": _get_op_log(session_id, limit=20),
+    })
+    response.set_cookie(key="session_id", value=session_id)
+    return response
+
+
+@app.put("/conversations/{session_id}/rename")
+async def rename_conversation(session_id: str, request: Request, user: dict = Depends(require_auth)):
+    """Rename a conversation. JSON body: {"title": "new name"}"""
+    conv = get_conversation(session_id)
+    if not conv:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    if conv["user_id"] != user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+
+    body = await request.json()
+    new_title = body.get("title", "").strip()
+    if not new_title or len(new_title) > 50:
+        raise HTTPException(status_code=400, detail="Title must be 1-50 characters")
+
+    update_conversation_title(session_id, new_title)
+    return JSONResponse(content={"session_id": session_id, "title": new_title})
+
+
+@app.delete("/conversations/{session_id}")
+async def remove_conversation(session_id: str, user: dict = Depends(require_auth)):
+    """Delete a conversation (DB record + JSON file)."""
+    conv = get_conversation(session_id)
+    if not conv:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    if conv["user_id"] != user["id"]:
+        raise HTTPException(status_code=403, detail="Access denied")
+
+    delete_conversation(session_id)
+    delete_user_session(session_id)
+    return JSONResponse(content={"deleted": session_id})
 
 
 # ── Authentication routes ──────────────────────────────────────────

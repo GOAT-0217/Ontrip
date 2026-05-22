@@ -2,7 +2,7 @@ import os
 import hashlib
 import secrets
 import sqlite3
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 
 
 def get_db_path() -> str:
@@ -112,5 +112,113 @@ def get_user_by_id(user_id: int) -> Optional[Dict]:
             "username": row["username"],
             "created_at": row["created_at"],
         }
+    finally:
+        conn.close()
+
+
+# ── Conversation management ────────────────────────────────────────
+
+
+def ensure_conversations_table(conn: sqlite3.Connection) -> None:
+    conn.execute(
+        """
+        CREATE TABLE IF NOT EXISTS conversations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            session_id TEXT NOT NULL UNIQUE,
+            title TEXT NOT NULL DEFAULT '新对话',
+            created_at TEXT NOT NULL DEFAULT (datetime('now')),
+            updated_at TEXT NOT NULL DEFAULT (datetime('now')),
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+        """
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_conversations_user_id ON conversations(user_id)"
+    )
+    conn.execute(
+        "CREATE INDEX IF NOT EXISTS idx_conversations_session_id ON conversations(session_id)"
+    )
+    conn.commit()
+
+
+def create_conversation(user_id: int, session_id: str, title: str = "新对话") -> int:
+    conn = get_db_connection()
+    try:
+        ensure_conversations_table(conn)
+        cursor = conn.execute(
+            "INSERT INTO conversations (user_id, session_id, title) VALUES (?, ?, ?)",
+            (user_id, session_id, title),
+        )
+        conn.commit()
+        return cursor.lastrowid
+    finally:
+        conn.close()
+
+
+def list_conversations(user_id: int) -> List[Dict]:
+    conn = get_db_connection()
+    try:
+        ensure_conversations_table(conn)
+        cursor = conn.execute(
+            "SELECT id, session_id, title, created_at, updated_at "
+            "FROM conversations WHERE user_id = ? ORDER BY updated_at DESC",
+            (user_id,),
+        )
+        return [dict(row) for row in cursor.fetchall()]
+    finally:
+        conn.close()
+
+
+def get_conversation(session_id: str) -> Optional[Dict]:
+    conn = get_db_connection()
+    try:
+        ensure_conversations_table(conn)
+        cursor = conn.execute(
+            "SELECT id, user_id, session_id, title, created_at, updated_at "
+            "FROM conversations WHERE session_id = ?",
+            (session_id,),
+        )
+        row = cursor.fetchone()
+        return dict(row) if row else None
+    finally:
+        conn.close()
+
+
+def update_conversation_title(session_id: str, title: str) -> None:
+    conn = get_db_connection()
+    try:
+        ensure_conversations_table(conn)
+        conn.execute(
+            "UPDATE conversations SET title = ?, updated_at = datetime('now') WHERE session_id = ?",
+            (title, session_id),
+        )
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def update_conversation_time(session_id: str) -> None:
+    conn = get_db_connection()
+    try:
+        ensure_conversations_table(conn)
+        conn.execute(
+            "UPDATE conversations SET updated_at = datetime('now') WHERE session_id = ?",
+            (session_id,),
+        )
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def delete_conversation(session_id: str) -> bool:
+    conn = get_db_connection()
+    try:
+        ensure_conversations_table(conn)
+        cursor = conn.execute(
+            "DELETE FROM conversations WHERE session_id = ?", (session_id,)
+        )
+        conn.commit()
+        return cursor.rowcount > 0
     finally:
         conn.close()

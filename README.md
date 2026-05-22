@@ -109,7 +109,7 @@ D:\Ontrip-main\
 * 🧬 此步骤将处理数据并将向量填充至 Qdrant 数据库: `poetry run python vectorizer/app/main.py`
 
 5️⃣ **运行客户支持聊天应用**
-* 💬 启动主聊天应用: `poetry run python ./customer_support_chat/app/main.py`
+* 💬 启动主聊天应用: `poetry run uvicorn web_app.app.main:app`
 * ⌨️通过命令行界面与聊天机器人进行交互. 输入 `quit`, `exit`, 或者 `q` 即可停止程序.
 
 ## 📐 开发规范

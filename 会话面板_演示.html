@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ontrip · 多会话旅行助手</title>
+<style>
+/* ================================================================
+   Reset & 基础
+   ================================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    height: 100vh; display: flex; overflow: hidden;
+    background: #f0f2f5; color: #1a1a2e;
+}
+
+/* ================================================================
+   左侧边栏 — 260px, DeepSeek 风格
+   ================================================================ */
+.sidebar {
+    width: 260px; min-width: 260px; height: 100vh;
+    background: #f7f7f8;
+    display: flex; flex-direction: column;
+    border-right: 1px solid #e5e5e8;
+    user-select: none;
+}
+
+/* ── 品牌区 ── */
+.brand {
+    padding: 18px 16px 10px;
+    font-size: 0.85rem; font-weight: 700; color: #333;
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: 8px;
+}
+.brand-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 0.9rem;
+}
+
+/* ── 新对话按钮 ── */
+.new-chat-area { padding: 6px 12px 12px; flex-shrink: 0; }
+.btn-new-chat {
+    width: 100%; padding: 10px 0; border-radius: 10px;
+    border: 1px solid #d9d9de; background: #fff;
+    color: #333; font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; transition: all 0.15s;
+    font-family: inherit; letter-spacing: 0.01em;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+}
+.btn-new-chat:hover { background: #f0f0f3; border-color: #c5c5cc; }
+.btn-new-chat::before { content: '+'; font-size: 1.1rem; font-weight: 300; }
+
+/* ── 会话列表容器 ── */
+.conv-scroll {
+    flex: 1; overflow-y: auto; overflow-x: hidden;
+    padding: 0 8px;
+}
+.conv-scroll::-webkit-scrollbar { width: 3px; }
+.conv-scroll::-webkit-scrollbar-track { background: transparent; }
+.conv-scroll::-webkit-scrollbar-thumb { background: #d5d5da; border-radius: 3px; }
+
+/* ── 日期分组标题 ── */
+.date-label {
+    padding: 10px 12px 3px;
+    font-size: 0.68rem; font-weight: 600;
+    color: #999; letter-spacing: 0.03em;
+}
+
+/* ── 会话条目 ── */
+.conv-item {
+    display: flex; align-items: center; gap: 9px;
+    padding: 9px 10px; border-radius: 10px;
+    cursor: pointer; margin-bottom: 1px;
+    transition: background 0.12s; position: relative;
+}
+.conv-item:hover { background: #ececf1; }
+.conv-item.active { background: #e3e5eb; }
+.conv-item.active .conv-title { color: #1a1a2e; font-weight: 600; }
+
+/* 聊天气泡图标 */
+.conv-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: #e8e8ed; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+}
+.conv-icon svg { width: 14px; height: 14px; stroke: #999; fill: none; stroke-width: 1.8; }
+.conv-item.active .conv-icon { background: #d4daf7; }
+.conv-item.active .conv-icon svg { stroke: #3b82f6; }
+
+/* 标题 */
+.conv-title {
+    flex: 1; font-size: 0.83rem; color: #555;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    line-height: 1.4; min-width: 0;
+}
+
+/* 删除按钮 */
+.conv-del {
+    width: 22px; height: 22px; border-radius: 6px; border: none;
+    background: transparent; color: #bbb; font-size: 0.8rem;
+    cursor: pointer; display: flex; align-items: center;
+    justify-content: center; transition: 0.12s; opacity: 0; flex-shrink: 0;
+}
+.conv-item:hover .conv-del { opacity: 1; }
+.conv-del:hover { background: #fdd; color: #e55; }
+
+/* 空状态 */
+.conv-empty {
+    color: #bbb; font-size: 0.8rem; text-align: center;
+    padding: 28px 12px; line-height: 1.7;
+}
+
+/* 内联重命名输入框 */
+.rename-input {
+    width: 100%; padding: 3px 6px;
+    background: #fff; border: 1px solid #3b82f6; border-radius: 6px;
+    color: #333; font-size: 0.82rem; font-family: inherit; outline: none;
+    line-height: 1.4;
+}
+
+/* ================================================================
+   分割线 + 操作日志区（保留原有模块）
+   ================================================================ */
+.log-divider {
+    margin: 0 12px; border: none;
+    border-top: 1px solid #e5e5e8; flex-shrink: 0;
+}
+.log-section {
+    padding: 12px 16px 16px; flex-shrink: 0;
+    max-height: 220px; overflow-y: auto;
+}
+.log-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+}
+.log-header h3 { font-size: 0.82rem; font-weight: 600; color: #555; }
+.btn-clear-log {
+    background: none; border: 1px solid #ddd; color: #999;
+    padding: 3px 10px; border-radius: 12px; font-size: 0.7rem;
+    cursor: pointer; font-family: inherit; transition: 0.15s;
+}
+.btn-clear-log:hover { background: #eee; color: #555; }
+
+.log-content {
+    font-size: 0.73rem; color: #bbb; text-align: center;
+    padding: 10px 0; line-height: 1.6;
+}
+.log-entry {
+    background: #fff; border-radius: 8px; padding: 8px 10px;
+    margin-bottom: 4px; font-size: 0.72rem; color: #666;
+    border-left: 3px solid #3b82f6;
+}
+
+/* ── 底部 ── */
+.sidebar-footer {
+    padding: 8px 16px 14px; flex-shrink: 0;
+    border-top: 1px solid #e5e5e8;
+}
+.btn-logout {
+    width: 100%; padding: 8px 0; border-radius: 8px;
+    border: 1px solid #ddd; background: #fff;
+    color: #888; font-size: 0.8rem; cursor: pointer;
+    font-family: inherit; transition: 0.15s;
+}
+.btn-logout:hover { background: #fee; border-color: #fcc; color: #d44; }
+
+/* ================================================================
+   右侧聊天区
+   ================================================================ */
+.chat-main {
+    flex: 1; display: flex; flex-direction: column;
+    background: #fff;
+}
+
+/* 聊天头部 */
+.chat-header {
+    padding: 16px 24px; border-bottom: 1px solid #eee;
+    display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.chat-header h2 { font-size: 1.1rem; font-weight: 600; color: #1a1a2e; }
+.chat-header span { font-size: 0.78rem; color: #999; margin-left: 4px; }
+
+/* 消息区 */
+.chat-messages {
+    flex: 1; overflow-y: auto; padding: 20px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+}
+.chat-messages::-webkit-scrollbar { width: 5px; }
+.chat-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius: 5px; }
+
+.msg {
+    max-width: 75%; padding: 12px 16px; border-radius: 16px;
+    line-height: 1.55; font-size: 0.92rem; animation: fadeIn 0.2s;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.msg.user { align-self: flex-end; background: #3b82f6; color: #fff; border-bottom-right-radius: 4px; }
+.msg.ai   { align-self: flex-start; background: #f4f4f6; color: #333; border-bottom-left-radius: 4px; }
+.msg .sender { font-weight: 600; font-size: 0.72rem; opacity: 0.6; margin-bottom: 3px; }
+
+/* 输入区 */
+.chat-input-area {
+    padding: 14px 24px 20px; border-top: 1px solid #eee; flex-shrink: 0;
+}
+.input-row { display: flex; gap: 10px; }
+.input-row input {
+    flex: 1; padding: 12px 18px; border-radius: 24px;
+    border: 1px solid #ddd; font-size: 0.92rem; font-family: inherit;
+    outline: none; transition: border-color 0.15s;
+}
+.input-row input:focus { border-color: #3b82f6; }
+.btn-send {
+    padding: 10px 20px; border-radius: 20px; border: none;
+    background: #3b82f6; color: #fff; font-weight: 600;
+    font-size: 0.88rem; cursor: pointer; transition: 0.15s;
+    font-family: inherit;
+}
+.btn-send:hover { background: #2563eb; }
+
+/* ================================================================
+   响应式
+   ================================================================ */
+@media (max-width: 768px) {
+    .sidebar { width: 100%; min-width: 100%; height: auto; max-height: 40vh; }
+    body { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== 左侧边栏 ========== -->
+<div class="sidebar">
+
+    <!-- 品牌 -->
+    <div class="brand">
+        <div class="brand-icon">✈</div>
+        Ontrip · 旅行管家
+    </div>
+
+    <!-- 新对话按钮 -->
+    <div class="new-chat-area">
+        <button class="btn-new-chat" onclick="newConversation()">新对话</button>
+    </div>
+
+    <!-- 会话列表（日期分组） -->
+    <div class="conv-scroll" id="conv-list"></div>
+
+    <!-- 分割线 -->
+    <hr class="log-divider">
+
+    <!-- 操作日志（保留原有模块） -->
+    <div class="log-section">
+        <div class="log-header">
+            <h3>操作日志</h3>
+            <button class="btn-clear-log" onclick="clearLog()">清除</button>
+        </div>
+        <div id="log-display">
+            <div class="log-content">暂无日志</div>
+        </div>
+    </div>
+
+    <!-- 退出 -->
+    <div class="sidebar-footer">
+        <button class="btn-logout" onclick="alert('已退出（演示）')">退出登录</button>
+    </div>
+</div>
+
+<!-- ========== 右侧聊天区 ========== -->
+<div class="chat-main" id="chat-main">
+    <div class="chat-header">
+        <h2 id="chat-title">请选择一个对话</h2>
+        <span id="chat-subtitle"></span>
+    </div>
+    <div class="chat-messages" id="chat-msgs">
+        <div style="text-align:center;color:#ccc;margin-top:60px;font-size:0.9rem;">
+            👈 从左侧选择一个对话开始
+        </div>
+    </div>
+    <div class="chat-input-area">
+        <div class="input-row">
+            <input type="text" id="user-input" placeholder="输入消息..." disabled>
+            <button class="btn-send" id="send-btn" onclick="sendMsg()" disabled>发送</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ================================================================
+// 数据层 — localStorage 持久化
+// ================================================================
+
+var STORAGE_KEY = 'ontrip_deepseek_demo';
+
+/** 从 localStorage 读取，无数据时返回 null */
+function loadData() {
+    try { var r = localStorage.getItem(STORAGE_KEY); return r ? JSON.parse(r) : null; } catch(e) { return null; }
+}
+
+/** 保存到 localStorage */
+function saveData(data) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+/**
+ * 初始化示例数据（首次使用时）
+ * 返回结构: { conversations: [...], activeId: '...', logs: [...] }
+ */
+function initDemoData() {
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    // 今天
+    var c1 = {
+        id: 'c1', title: '新对话 1',
+        created: today.getTime(),
+        messages: [
+            { sender:'user', text:'你好，我想咨询一下北京飞东京的航班' },
+            { sender:'ai',   text:'您好！为您查询到以下航班：\n\n✈ CA925 北京首都→东京成田\n  08:45-13:00 | 直飞 | ¥3,280\n\n✈ JL020 北京大兴→东京羽田\n  10:30-14:50 | 直飞 | ¥3,650\n\n需要帮您预订吗？' }
+        ]
+    };
+
+    // 7天内（2天前）
+    var d2 = new Date(today.getTime() - 2*86400000);
+    var c2 = {
+        id: 'c2', title: 'AI Agent项目面试提问',
+        created: d2.getTime(),
+        messages: [
+            { sender:'user', text:'面试中被问到"如何处理多Agent之间通信冲突"，怎么回答比较好？' },
+            { sender:'ai',   text:'可以从三个层面回答：\n\n1. 仲裁机制 — 设定优先级，主Agent裁决\n2. 消息队列 — 异步解耦，避免死锁\n3. 共享上下文 — 统一State管理\n\n面试官通常想考察你对LangGraph中State和interrupt机制的理解。' }
+        ]
+    };
+
+    // 7天内（4天前）
+    var d3 = new Date(today.getTime() - 4*86400000);
+    var c3 = {
+        id: 'c3', title: '论文题目来源意义解析',
+        created: d3.getTime(),
+        messages: [
+            { sender:'user', text:'我的论文题目是"基于大语言模型的多智能体协作机制研究"，导师让我阐述题目的来源和意义' },
+            { sender:'ai',   text:'题目的学术价值可以从以下角度阐述：\n\n来源 — LLM推理能力突破使Agent具备了自主决策可能；AutoGPT/MetaGPT等工作验证了多Agent可行性\n\n意义 — 解决单Agent能力瓶颈；模拟人类组织协作模式；为AGI提供中间形态参考' }
+        ]
+    };
+
+    // 更早（10天前）
+    var d4 = new Date(today.getTime() - 10*86400000);
+    var c4 = {
+        id: 'c4', title: '简历深度分析咨询',
+        created: d4.getTime(),
+        messages: [
+            { sender:'user', text:'帮我分析一下我的简历，我想投AI Agent开发岗位' },
+            { sender:'ai',   text:'请把简历内容发给我，我会从以下维度分析：\n\n1. 技术栈匹配度（LangChain/LangGraph经验权重最高）\n2. 项目深度（是否有端到端Agent系统经验）\n3. 量化成果（提升了多少效率/解决了什么问题）' }
+        ]
+    };
+
+    var data = {
+        conversations: [c1, c2, c3, c4],
+        activeId: 'c1',
+        logs: [
+            { time: now.toLocaleTimeString(), text: '系统启动 — 已加载 4 个历史会话' }
+        ]
+    };
+    saveData(data);
+    return data;
+}
+
+// ── 全局状态 ──
+var appData = loadData() || initDemoData();
+
+// ================================================================
+// 会话列表渲染 — 按日期分组：今天 / 7天内 / 更早
+// ================================================================
+
+var CHAT_ICON = '<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+
+function renderConvList() {
+    var list = document.getElementById('conv-list');
+    var convs = appData.conversations;
+    if (!convs.length) {
+        list.innerHTML = '<div class="conv-empty">暂无对话<br>点击上方"新对话"开始</div>';
+        return;
+    }
+
+    var now = new Date();
+    var today0  = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    var week0   = today0 - 7 * 86400000;
+
+    // 3 个分组
+    var groups = [
+        { label:'今天',   items:[] },
+        { label:'7天内',  items:[] },
+        { label:'更早',   items:[] }
+    ];
+
+    // 按 created 降序排
+    var sorted = convs.slice().sort(function(a,b){ return b.created - a.created; });
+
+    sorted.forEach(function(c){
+        if (c.created >= today0) groups[0].items.push(c);
+        else if (c.created >= week0) groups[1].items.push(c);
+        else groups[2].items.push(c);
+    });
+
+    var html = '';
+    groups.forEach(function(g){
+        if (!g.items.length) return;
+        html += '<div class="date-label">' + g.label + '</div>';
+        g.items.forEach(function(c){
+            var isActive = c.id === appData.activeId;
+            html += '<div class="conv-item' + (isActive ? ' active' : '') + '" ' +
+                'onclick="switchConv(\'' + c.id + '\')" ' +
+                'ondblclick="startRename(event,\'' + c.id + '\')">' +
+                '<div class="conv-icon">' + CHAT_ICON + '</div>' +
+                '<div class="conv-title" id="title-' + c.id + '" title="' + escHtml(c.title) + '">' + escHtml(c.title) + '</div>' +
+                '<button class="conv-del" onclick="event.stopPropagation();deleteConv(\'' + c.id + '\')" title="删除">×</button>' +
+                '</div>';
+        });
+    });
+    list.innerHTML = html;
+}
+
+function escHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ================================================================
+// 会话切换、新建、删除、重命名
+// ================================================================
+
+function switchConv(id) {
+    if (id === appData.activeId) return;
+    appData.activeId = id;
+    saveData(appData);
+    renderConvList();
+    renderChat();
+    addLog('切换到: ' + getConvTitle(id));
+}
+
+function getConv(id) {
+    return appData.conversations.find(function(c){ return c.id === id; }) || null;
+}
+
+function getConvTitle(id) {
+    var c = getConv(id); return c ? c.title : '未知对话';
+}
+
+function newConversation() {
+    var n = appData.conversations.length + 1;
+    var c = {
+        id: 'c' + Date.now(),
+        title: '新对话 ' + n,
+        created: Date.now(),
+        messages: []
+    };
+    appData.conversations.unshift(c);
+    appData.activeId = c.id;
+    saveData(appData);
+    renderConvList();
+    renderChat();
+    addLog('创建新对话: ' + c.title);
+}
+
+function deleteConv(id) {
+    if (!confirm('确定删除「' + getConvTitle(id) + '」？此操作不可撤销。')) return;
+    appData.conversations = appData.conversations.filter(function(c){ return c.id !== id; });
+    if (appData.activeId === id) {
+        appData.activeId = appData.conversations.length ? appData.conversations[0].id : '';
+    }
+    saveData(appData);
+    renderConvList();
+    renderChat();
+    addLog('已删除对话: ' + id);
+}
+
+// ── 双击重命名 ──
+var _renaming = null;
+
+function startRename(e, id) {
+    e.stopPropagation();
+    if (_renaming === id) return;
+    _renaming = id;
+    var el = document.getElementById('title-' + id);
+    var old = el.textContent || '';
+    el.innerHTML = '<input class="rename-input" id="rinput-' + id + '" value="' + escHtml(old) + '" maxlength="50">';
+    var inp = document.getElementById('rinput-' + id);
+    inp.focus(); inp.select();
+    inp.addEventListener('blur',  function(){ finishRename(id, old); });
+    inp.addEventListener('keydown', function(ev){
+        if (ev.key === 'Enter'){ ev.preventDefault(); finishRename(id, old); }
+        if (ev.key === 'Escape'){ cancelRename(id, old); }
+    });
+}
+
+function finishRename(id, fallback) {
+    var inp = document.getElementById('rinput-' + id);
+    var title = (inp ? inp.value.trim() : fallback) || fallback;
+    title = title.substring(0, 50);
+    _renaming = null;
+    var c = getConv(id); if (c) { c.title = title; saveData(appData); }
+    renderConvList();
+    renderChat();
+    addLog('重命名: ' + title);
+}
+
+function cancelRename(id, old) {
+    _renaming = null;
+    var el = document.getElementById('title-' + id);
+    if (el) el.textContent = old;
+}
+
+// ================================================================
+// 右侧聊天区渲染
+// ================================================================
+
+function renderChat() {
+    var c = getConv(appData.activeId);
+    var titleEl = document.getElementById('chat-title');
+    var subEl   = document.getElementById('chat-subtitle');
+    var msgsEl  = document.getElementById('chat-msgs');
+    var inpEl   = document.getElementById('user-input');
+    var btnEl   = document.getElementById('send-btn');
+
+    if (c) {
+        titleEl.textContent = c.title;
+        subEl.textContent = '';
+        msgsEl.innerHTML = '';
+        if (c.messages.length) {
+            c.messages.forEach(function(m){
+                var div = document.createElement('div');
+                div.className = 'msg ' + m.sender;
+                div.innerHTML = '<div class="sender">' + (m.sender === 'user' ? '你' : 'Ontrip') + '</div>' + m.text.replace(/\n/g,'<br>');
+                msgsEl.appendChild(div);
+            });
+        } else {
+            msgsEl.innerHTML = '<div style="text-align:center;color:#ccc;margin-top:60px;">✨ 新对话，发送第一条消息吧</div>';
+        }
+        msgsEl.scrollTop = msgsEl.scrollHeight;
+        inpEl.disabled = false;
+        btnEl.disabled = false;
+    } else {
+        titleEl.textContent = '请选择一个对话';
+        subEl.textContent = '';
+        msgsEl.innerHTML = '<div style="text-align:center;color:#ccc;margin-top:60px;">👈 从左侧选择一个对话开始</div>';
+        inpEl.disabled = true;
+        btnEl.disabled = true;
+    }
+}
+
+/** 发送模拟消息 */
+function sendMsg() {
+    var inp = document.getElementById('user-input');
+    var text = inp.value.trim(); if (!text) return;
+    var c = getConv(appData.activeId); if (!c) return;
+    c.messages.push({ sender:'user', text:text });
+    inp.value = '';
+    renderChat();
+    addLog('发送消息: ' + text.substring(0, 30));
+    // 模拟 AI 回复
+    setTimeout(function(){
+        c.messages.push({ sender:'ai', text:'收到您的消息：「' + text.substring(0,40) + '」…\n\n这是模拟回复。在真实环境中，这里会连接到 Ontrip 的多智能体旅行助手进行回复。' });
+        saveData(appData);
+        renderChat();
+    }, 800);
+}
+
+// ================================================================
+// 操作日志
+// ================================================================
+
+function addLog(text) {
+    var now = new Date().toLocaleTimeString();
+    appData.logs.push({ time:now, text:text });
+    if (appData.logs.length > 50) appData.logs = appData.logs.slice(-50);  // 最多50条
+    saveData(appData);
+    renderLog();
+}
+
+function clearLog() {
+    appData.logs = [];
+    saveData(appData);
+    renderLog();
+}
+
+function renderLog() {
+    var el = document.getElementById('log-display');
+    if (!appData.logs.length) {
+        el.innerHTML = '<div class="log-content">暂无日志</div>';
+        return;
+    }
+    var html = '';
+    // 最新在前
+    var reversed = appData.logs.slice().reverse();
+    reversed.forEach(function(l){
+        html += '<div class="log-entry"><strong>' + l.time + '</strong> ' + escHtml(l.text) + '</div>';
+    });
+    el.innerHTML = html;
+}
+
+// ================================================================
+// 键盘支持
+// ================================================================
+
+document.getElementById('user-input').addEventListener('keypress', function(e){
+    if (e.key === 'Enter') sendMsg();
+});
+
+// ================================================================
+// 初始化
+// ================================================================
+
+renderConvList();
+renderChat();
+renderLog();
+</script>
+</body>
+</html>

@@ -25,6 +25,8 @@ from customer_support_chat.app.services.guardrails.guardrail_agents import (
     jailbreak_guardrail_agent_instructions,
     relevance_guardrail_agent,
     relevance_guardrail_agent_instructions,
+    _run_signature_check,
+    _write_audit_log,
 )
 from customer_support_chat.app.services.assistants.assistant_base import (
   Assistant,
@@ -101,46 +103,72 @@ builder.add_node("fetch_user_info", user_info)
 
 # --- Security Guardrail Node ---
 def guardrail_check(state: State, config: RunnableConfig):
-    """Node to check user input for safety and relevance."""
-    # Get the latest user message
-    # Assuming the last message is always from the user in this context
+    """Node to check user input for safety and relevance.
+
+    Layered defense:
+      1. Regex signature pre-filter (fast, deterministic)
+      2. LLM jailbreak detection (semantic)
+      3. LLM relevance check (domain gating)
+    """
     user_messages = [msg for msg in state["messages"] if isinstance(msg, HumanMessage)]
     if not user_messages:
         logger.warning("No user message found for guardrail check. Allowing.")
         return {
             "messages": [HumanMessage(content="No user input to check. Please provide a query.")]
         }
-    
+
     latest_user_message = user_messages[-1]
     user_input = latest_user_message.content
-    
+
     logger.info(f"🛡️ Checking safety and relevance for user input: '{user_input}'")
-    
-    # 1. Check for Jailbreak attempts
-    jailbreak_prompt = f"{jailbreak_guardrail_agent_instructions}\n\nUser Input: {user_input}"
-    jailbreak_result = jailbreak_guardrail_agent.invoke(jailbreak_prompt)
-    
-    if not jailbreak_result.is_safe:
-        logger.warning(f"🚨 Jailbreak attempt detected: {jailbreak_result.reasoning}")
+
+    # ── Layer 1: Signature pre-filter (bypasses LLM for known attacks) ──
+    sig_result = _run_signature_check(user_input)
+    if sig_result is not None and not sig_result.is_safe:
+        logger.warning(f"🚨 Signature match — jailbreak blocked: {sig_result.reasoning}")
+        _write_audit_log({
+            "event": "jailbreak_blocked",
+            "layer": "signature",
+            "user_input": user_input,
+            "reasoning": sig_result.reasoning,
+        })
         return {
-            "messages": [HumanMessage(content=f"I cannot assist with that request. Reason: {jailbreak_result.reasoning}")]
+            "messages": [HumanMessage(content=f"I cannot assist with that request.")]
         }
 
-    # 2. Check for Relevance
+    # ── Layer 2: LLM jailbreak detection ──
+    jailbreak_prompt = f"{jailbreak_guardrail_agent_instructions}\n\nUser Input: {user_input}"
+    jailbreak_result = jailbreak_guardrail_agent.invoke(jailbreak_prompt)
+
+    if not jailbreak_result.is_safe:
+        logger.warning(f"🚨 LLM jailbreak detected: {jailbreak_result.reasoning}")
+        _write_audit_log({
+            "event": "jailbreak_blocked",
+            "layer": "llm",
+            "user_input": user_input,
+            "reasoning": jailbreak_result.reasoning,
+        })
+        return {
+            "messages": [HumanMessage(content=f"I cannot assist with that request.")]
+        }
+
+    # ── Layer 3: LLM relevance check ──
     relevance_prompt = f"{relevance_guardrail_agent_instructions}\n\nUser Input: {user_input}"
     relevance_result = relevance_guardrail_agent.invoke(relevance_prompt)
-    
+
     if not relevance_result.is_relevant:
-        logger.warning(f"⚠️ Irrelevant input detected: {relevance_result.reasoning}")
-        # For now, we will still allow the conversation to proceed, but log the issue.
-        # This could be changed to return a message and end the conversation if desired.
-        # return {
-        #     "messages": [HumanMessage(content=f"I can only help with queries related to flights, hotels, car rentals, excursions, e-commerce, forms, and blog searches. Your query seems unrelated. Reason: {relevance_result.reasoning}")]
-        # }
-        
-    # If both checks pass, the input is safe and (at least potentially) relevant.
-    logger.info("✅ Input passed safety and relevance checks.")
-    return {"messages": []} # No new message to add, just proceed
+        logger.warning(f"⚠️ Irrelevant input rejected: {relevance_result.reasoning}")
+        _write_audit_log({
+            "event": "relevance_blocked",
+            "user_input": user_input,
+            "reasoning": relevance_result.reasoning,
+        })
+        return {
+            "messages": [HumanMessage(content=f"I can only help with queries related to flights, hotels, car rentals, excursions, e-commerce, forms, and blog searches. Your query seems unrelated.")]
+        }
+
+    logger.info("✅ Input passed all safety and relevance checks.")
+    return {"messages": []}
 
 builder.add_node("guardrail_check", guardrail_check)
 
@@ -405,7 +433,8 @@ builder.add_node("primary_assistant", primary_assistant)
 builder.add_node(
   "primary_assistant_tools", create_tool_node_with_fallback(primary_assistant_tools)
 )
-builder.add_edge("fetch_user_info", "primary_assistant")
+# All user input must pass through guardrail_check before reaching primary_assistant.
+# The edge fetch_user_info → guardrail_check → primary_assistant is defined above.
 
 def route_primary_assistant(state: State) -> Literal[
   "primary_assistant_tools",
@@ -468,6 +497,10 @@ builder.add_edge("primary_assistant_tools", "primary_assistant")
 
 # Route from guardrail check to primary assistant
 builder.add_edge("guardrail_check", "primary_assistant")
+
+# NOTE: Do NOT add a direct edge from fetch_user_info to primary_assistant;
+# all user input must pass through guardrail_check first.
+# builder.add_edge("fetch_user_info", "primary_assistant")  # REMOVED — bypasses security
 
 # Compile the graph with interrupts
 interrupt_nodes = [

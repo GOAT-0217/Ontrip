@@ -35,10 +35,10 @@ def save_user_data(session_id: str, data: Dict[str, Any]):
     with open(user_file, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def get_user_session(session_id: str) -> Dict[str, Any]:
+def get_user_session(session_id: str, user_id: int = None) -> Dict[str, Any]:
     """Get a user session by session ID, creating a new one if it doesn't exist."""
     user_data = load_user_data(session_id)
-    
+
     if not user_data:
         # Initialize a new session with default values
         user_data = {
@@ -46,12 +46,21 @@ def get_user_session(session_id: str) -> Dict[str, Any]:
             "chat_history": [],
             "pending_action": None,
             "user_decision": None,
-            "operation_log": [],  # Add operation log storage
+            "operation_log": [],
             "created_at": datetime.now().isoformat()
         }
+        if user_id is not None:
+            user_data["user_id"] = user_id
         save_user_data(session_id, user_data)
-    
+
     return user_data
+
+
+def delete_user_session(session_id: str) -> None:
+    """Delete the JSON file for a session."""
+    user_file = get_user_data_file(session_id)
+    if os.path.exists(user_file):
+        os.remove(user_file)
 
 def update_user_chat_history(session_id: str, user_message: str, ai_response: str):
     """Update the chat history for a user session."""

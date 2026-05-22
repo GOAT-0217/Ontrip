@@ -38,52 +38,230 @@ body {
     flex-direction: row;
 }
 
-/* 聊天区域 (左侧) */
-.chat-area {
-    flex: 2.2;
+/* ================================================================
+   会话侧边栏 — DeepSeek 风格
+   ================================================================ */
+.conversation-panel {
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.02);
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 18, 28, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
 }
 
-.chat-header {
-    padding: 20px 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+/* ── 顶部新对话按钮区 ── */
+.conv-header {
+    padding: 16px 14px 12px;
+    flex-shrink: 0;
 }
 
-.logo {
-    width: 42px;
-    height: 42px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    border-radius: 14px;
+.conv-new-btn {
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    letter-spacing: 0.01em;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 16px -6px rgba(59, 130, 246, 0.3);
+    gap: 6px;
+}
+.conv-new-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+.conv-new-btn::before {
+    content: '+';
+    font-size: 1.1rem;
+    font-weight: 300;
 }
 
-.logo span {
-    font-size: 22px;
-    font-weight: 600;
-    color: white;
-    letter-spacing: -0.5px;
+/* ── 对话列表容器 ── */
+#conversation-list {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 8px 8px;
 }
+
+#conversation-list::-webkit-scrollbar { width: 3px; }
+#conversation-list::-webkit-scrollbar-track { background: transparent; }
+#conversation-list::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.06); border-radius: 3px; }
+
+/* ── 日期分组标题 ── */
+.conv-date-group {
+    padding: 10px 12px 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/* ── 对话条目 ── */
+.conv-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 1px;
+    position: relative;
+    transition: background 0.15s ease;
+    animation: fadeInUp 0.2s ease-out;
+}
+.conv-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+.conv-item.active {
+    background: rgba(255, 255, 255, 0.08);
+}
+.conv-item.active .conv-title {
+    color: rgba(255, 255, 255, 0.92);
+}
+
+/* ── 聊天气泡图标 ── */
+.conv-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.conv-icon svg {
+    width: 14px;
+    height: 14px;
+    stroke: rgba(255, 255, 255, 0.35);
+    fill: none;
+    stroke-width: 1.8;
+}
+.conv-item.active .conv-icon {
+    background: rgba(99, 155, 255, 0.15);
+}
+.conv-item.active .conv-icon svg {
+    stroke: rgba(147, 197, 253, 0.7);
+}
+
+/* ── 标题 ── */
+.conv-title {
+    flex: 1;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    min-width: 0;
+}
+
+/* ── 删除按钮（hover 显示） ── */
+.conv-delete {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    opacity: 0;
+    flex-shrink: 0;
+}
+.conv-item:hover .conv-delete {
+    opacity: 1;
+}
+.conv-delete:hover {
+    background: rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
+    border-radius: 6px;
+}
+
+/* ── 内联重命名输入框 ── */
+.conv-rename-input {
+    width: 100%;
+    padding: 3px 6px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.82rem;
+    font-family: inherit;
+    outline: none;
+    line-height: 1.4;
+}
+.conv-rename-input:focus {
+    border-color: rgba(59, 130, 246, 0.7);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+/* ── 空状态 ── */
+.conv-empty {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 32px 16px;
+    line-height: 1.6;
+}
+
+/* ================================================================
+   聊天区域
+   ================================================================ */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.chat-header {
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.08);
+}
+
+.logo {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 12px -4px rgba(59, 130, 246, 0.3);
+}
+
+.logo span { font-size: 19px; font-weight: 600; color: white; }
 
 .header-title h2 {
-    color: white;
-    font-weight: 600;
-    font-size: 1.5rem;
-    letter-spacing: -0.02em;
+    color: white; font-weight: 600;
+    font-size: 1.2rem; letter-spacing: -0.02em;
 }
 
 .header-title p {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.8rem;
-    margin-top: 2px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.72rem; margin-top: 1px;
 }
 
 /* 消息区域 */
@@ -199,13 +377,19 @@ body {
 
 /* 操作日志侧边栏 */
 .operation-log {
-    flex: 1.2;
-    background: rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-    padding: 20px 16px;
-    color: white;
+    width: 280px; min-width: 280px; max-width: 280px;
+    background: rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(8px);
+    display: flex; flex-direction: column;
+    padding: 16px 14px; color: white;
+    border-left: 1px solid rgba(255,255,255,0.05);
+    transition: width 0.25s ease, min-width 0.25s ease, padding 0.25s ease, opacity 0.25s ease;
+    overflow: hidden;
+}
+.operation-log.collapsed {
+    width: 0px; min-width: 0px; max-width: 0px;
+    padding: 0; opacity: 0;
+    border-left: none;
 }
 
 .log-header {
@@ -235,46 +419,41 @@ body {
 .clear-log-btn:hover { background: rgba(255, 255, 255, 0.15); }
 
 .user-badge {
-    display: inline-block;
-    margin-left: 8px;
-    padding: 2px 10px;
-    background: rgba(59, 130, 246, 0.2);
+    margin-left: auto;
+    padding: 3px 12px;
+    background: rgba(59, 130, 246, 0.15);
     border-radius: 12px;
-    font-size: 0.75rem;
-    color: #93c5fd;
-    font-weight: 500;
+    font-size: 0.72rem; color: #93c5fd; font-weight: 500;
+    white-space: nowrap;
 }
+
+.header-log-btn {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.15s;
+}
+.header-log-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
 .logout-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.6);
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: 0.2s;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 6px 12px; border-radius: 16px;
+    font-size: 0.75rem; cursor: pointer;
+    transition: 0.2s; font-family: inherit;
 }
-
 .logout-btn:hover {
-    background: rgba(239, 68, 68, 0.2);
-    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.25);
     color: #fca5a5;
 }
 
-.new-chat-btn {
-    margin-left: auto;
-    background: rgba(59, 130, 246, 0.15);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    color: #60a5fa;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.new-chat-btn:hover { background: rgba(59, 130, 246, 0.3); }
+.new-chat-btn { display: none; } /* replaced by sidebar button */
 
 #operation-log-content {
     flex: 1;
@@ -372,4 +551,182 @@ body {
 @media (max-width: 800px) {
     .app-container { flex-direction: column; height: 95vh; }
     .operation-log { max-height: 250px; }
+}
+
+/* ================================================================
+   Mini DeepSeek 风格会话面板 — 浮层 overlay（真实 280px 宽度）
+   ================================================================ */
+
+/* ── 触发按钮 ── */
+.mini-panel-toggle {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(10,25,35,0.65);
+    backdrop-filter: blur(8px);
+    color: #fff; font-size: 1.1rem;
+    cursor: pointer; z-index: 2000;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    transition: transform 0.2s, background 0.2s;
+    display: flex; align-items: center; justify-content: center;
+}
+.mini-panel-toggle:hover { transform: scale(1.08); background: rgba(59,130,246,0.35); }
+
+/* ── 浮层遮罩 ── */
+.mini-panel-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 3000;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(3px);
+    align-items: center; justify-content: center;
+}
+.mini-panel-overlay.open { display: flex; }
+
+/* ── 面板卡片 — 真实 280px 宽，无 transform ── */
+.mini-panel-card {
+    width: 280px;
+    max-height: 85vh;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 24px 50px rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ── 内部内容 ── */
+.mini-panel-inner {
+    width: 100%; height: 100%;
+    background:
+        url('/static/ontrip.png') center/cover no-repeat fixed,
+        rgba(12, 20, 32, 0.94);
+    background-blend-mode: soft-light;
+    display: flex; flex-direction: column;
+    color: #fff; font-family: inherit;
+}
+
+/* ── 品牌区 ── */
+.mp-brand {
+    padding: 14px 14px 8px;
+    font-size: 0.82rem; font-weight: 700;
+    display: flex; align-items: center; gap: 6px;
+    flex-shrink: 0; position: relative;
+    color: rgba(255,255,255,0.7);
+}
+.mp-close {
+    position: absolute; right: 10px; top: 10px;
+    width: 24px; height: 24px; border-radius: 50%;
+    border: none; background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.4); font-size: 0.8rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: 0.15s;
+}
+.mp-close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+/* ── 新对话按钮 ── */
+.mp-new-area { padding: 6px 12px 10px; flex-shrink: 0; }
+.mp-new-btn {
+    width: 100%; padding: 8px 0; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: rgba(255,255,255,0.75); font-size: 0.8rem; font-weight: 500;
+    cursor: pointer; font-family: inherit;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    transition: background 0.15s;
+}
+.mp-new-btn::before { content: '+'; font-size: 0.9rem; font-weight: 300; }
+.mp-new-btn:hover { background: rgba(255,255,255,0.1); }
+
+/* ── 会话列表滚动区 ── */
+.mp-conv-scroll {
+    flex: 1; overflow-y: auto; overflow-x: hidden;
+    padding: 0 8px; max-height: 340px;
+}
+.mp-conv-scroll::-webkit-scrollbar { width: 3px; }
+.mp-conv-scroll::-webkit-scrollbar-track { background: transparent; }
+.mp-conv-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 3px; }
+
+/* ── 日期分组标题 ── */
+.mp-date-label {
+    padding: 8px 10px 2px;
+    font-size: 0.62rem; font-weight: 600;
+    color: rgba(255,255,255,0.22);
+    letter-spacing: 0.04em;
+}
+
+/* ── 会话条目 ── */
+.mp-conv-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px; border-radius: 10px;
+    cursor: pointer; margin-bottom:1px;
+    transition: background 0.12s; position: relative;
+}
+.mp-conv-item:hover { background: rgba(255,255,255,0.05); }
+.mp-conv-item.active { background: rgba(255,255,255,0.1); }
+.mp-conv-item.active .mp-conv-title { color: rgba(255,255,255,0.9); }
+
+/* 聊天气泡图标 */
+.mp-conv-icon {
+    width: 26px; height: 26px; border-radius: 8px;
+    background: rgba(255,255,255,0.06); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+}
+.mp-conv-icon svg { width: 13px; height: 13px; stroke: rgba(255,255,255,0.3); fill: none; stroke-width: 1.8; }
+.mp-conv-item.active .mp-conv-icon { background: rgba(99,155,255,0.15); }
+.mp-conv-item.active .mp-conv-icon svg { stroke: rgba(147,197,253,0.65); }
+
+/* 标题 */
+.mp-conv-title {
+    flex: 1; font-size: 0.75rem; color: rgba(255,255,255,0.55);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    line-height: 1.4; min-width: 0;
+}
+.mp-conv-item.active .mp-conv-title { font-weight: 600; }
+
+/* 删除按钮 */
+.mp-conv-del {
+    width: 20px; height: 20px; border-radius: 6px; border: none;
+    background: transparent; color: rgba(255,255,255,0.12);
+    font-size: 0.75rem; cursor: pointer; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.12s; opacity: 0;
+}
+.mp-conv-item:hover .mp-conv-del { opacity: 1; }
+.mp-conv-del:hover { background: rgba(239,68,68,0.25); color: #fca5a5; }
+
+/* 空状态 */
+.mp-conv-empty {
+    color: rgba(255,255,255,0.15); font-size: 0.75rem;
+    text-align: center; padding: 28px 12px; line-height: 1.7;
+}
+
+/* ── 分割线 ── */
+.mp-divider {
+    margin: 0 12px; border: none;
+    border-top: 1px solid rgba(255,255,255,0.05); flex-shrink: 0;
+}
+
+/* ── 操作日志区 ── */
+.mp-log-section {
+    padding: 10px 14px 14px; flex-shrink: 0;
+    max-height: 120px; overflow-y: auto;
+}
+.mp-log-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 6px;
+}
+.mp-log-header span {
+    font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.45);
+}
+.mp-log-clear {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.4); padding: 2px 10px;
+    border-radius: 10px; font-size: 0.62rem; cursor: pointer; font-family: inherit;
+    transition: 0.15s;
+}
+.mp-log-clear:hover { background: rgba(255,255,255,0.1); }
+.mp-log-entry {
+    background: rgba(0,0,0,0.18); border-left: 3px solid #3b82f6;
+    border-radius: 6px; padding: 6px 10px; margin-bottom: 3px;
+    font-size: 0.62rem; color: rgba(255,255,255,0.4);
 }
