@@ -176,3 +176,24 @@ D:\Ontrip-main\
   - 用户数据存储：users 表写入 SQLite 关系数据库（travel2.sqlite），用户名唯一约束.
 - 聊天界面集成用户信息展示（用户名徽章）与退出登录按钮.
 
+## v0.0.4
+- 实现了越狱检测安全系统的全面修复与增强.
+  - 修复了护栏被绕过的致命 Bug（LangGraph 重复 add_edge 导致 guardrail_check 节点从未执行）.
+  - 安全策略从 fail-open 改为 fail-closed：LLM 异常时默认拦截，不再放行.
+  - 新增 12 条中文越狱签名规则（指令覆盖/提示词提取/角色扮演/DAN/SQL注入/XSS/命令注入/路径遍历等）.
+  - 三层纵深防护：正则签名预过滤（<1ms）→ LLM 越狱语义检测 → LLM 相关性检测.
+  - 拦截事件写入 guardrail_audit.log 持久化审计日志.
+  - 相关性检测由"只记录不拦截"改为实际拒绝非旅行领域查询.
+- 实现了多会话历史对话管理功能.
+  - 新增 conversations 表（SQLite），存储会话元数据（user_id + session_id + title + timestamps）.
+  - 左侧栏改为 DeepSeek 风格会话列表，按日期自动分组（今天/7天内/更早）.
+  - 点击会话无刷新切换（X-Session-Id Header 路由），消息即刻渲染.
+  - 支持双击标题重命名、hover 显示删除按钮、自动编号命名（"新对话 N"）.
+  - 双层持久化：后端 SQLite + JSON 文件 + 前端 localStorage 缓存.
+  - 切换锁防止快速连点竞态.
+- 前端 UI 全面美化.
+  - Header 精简：去除冗余按钮，新增操作日志折叠切换.
+  - 操作日志面板支持平滑收起/展开（280px ↔ 0）.
+  - 修复 clearOperationLog bug（原实现调用 fetch 而非清空 DOM）.
+  - 消息气泡优化、输入框毛玻璃效果、整体间距与视觉层次改进.
+
