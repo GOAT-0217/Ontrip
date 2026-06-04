@@ -3,4 +3,4 @@
 .env.*
 !.env.examplegit rm --cached .env
 
-README1.md
+README1.md___pycache___/

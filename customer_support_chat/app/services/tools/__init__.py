@@ -29,7 +29,7 @@ from .excursions import (
 # New tools for extended functionalities
 from .woocommerce import search_products, search_orders
 from .forms import submit_form
-from .blog import search_blog_posts
+from .blog import search_xiaohongshu
 from .web_search import web_search
 
 __all__ = [
@@ -56,6 +56,6 @@ __all__ = [
     "search_products",
     "search_orders",
     "submit_form",
-    "search_blog_posts",
+    "search_xiaohongshu",
     "web_search",
 ]

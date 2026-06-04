@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/ontrip.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 <div class="app-container">
@@ -85,35 +86,6 @@
 
 <script src="/static/ontrip.js"></script>
 
-<!-- ============================================================
-     Mini 会话面板浮层 — 真实 280px 宽，ontrip.png 背景
-     ============================================================ -->
-<button class="mini-panel-toggle" onclick="toggleMiniPanel()" title="会话面板">💬</button>
-
-<div class="mini-panel-overlay" id="mini-panel-overlay">
-    <div class="mini-panel-card">
-        <div class="mini-panel-inner">
-            <div class="mp-brand">
-                ✈ Ontrip · 旅行管家
-                <button class="mp-close" onclick="toggleMiniPanel()">✕</button>
-            </div>
-            <div class="mp-new-area">
-                <button class="mp-new-btn" onclick="miniNewConversation()">新对话</button>
-            </div>
-            <div class="mp-conv-scroll" id="mini-conv-list"></div>
-            <div class="mp-divider"></div>
-            <div class="mp-log-section">
-                <div class="mp-log-header">
-                    <span>操作日志</span>
-                    <button class="mp-log-clear" onclick="miniClearLog()">清除</button>
-                </div>
-                <div id="mini-log-display">
-                    <div style="color:rgba(255,255,255,0.2);font-size:0.62rem;text-align:center;padding:6px 0;">暂无日志</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 </body>
 </html>

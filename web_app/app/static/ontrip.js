@@ -37,14 +37,67 @@ async function apiFetch(url, options) {
 
 // ── Message rendering ─────────────────────────────────────────────
 
+function renderMarkdown(text) {
+    // Step 1: Convert markdown-style links [text](url) to clickable <a> tags
+    //         Guaranteed to work — no dependency on external library
+    text = text.replace(
+        /\[([^\]]*?)\]\((https?:\/\/[^\s\)]+)\)/g,
+        '<a target="_blank" rel="noopener noreferrer" href="$2">$1</a>'
+    );
+
+    // Step 2: Let marked handle bold / italic / lists / blockquotes
+    if (typeof marked !== 'undefined') {
+        try {
+            text = marked.parse(text, { breaks: true, gfm: true });
+        } catch (e) { /* fall through */ }
+    }
+
+    // Step 3: Safety net — convert any [text](url) that survived Step 1+2
+    //         (e.g. if marked escaped them back to plain text)
+    text = text.replace(
+        /\[([^\]]*?)\]\((https?:\/\/[^\s\)]+)\)/g,
+        '<a target="_blank" rel="noopener noreferrer" href="$2">$1</a>'
+    );
+
+    // Step 4: Convert leftover \n to <br>
+    text = text.replace(/\n/g, '<br>');
+
+    return text;
+}
+
 function addMessage(sender, message) {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message ' + (sender === 'user' ? 'user-message' : 'ai-message');
+    // User messages get <br>, AI messages get full markdown rendering
+    const formatted = sender === 'user' ? message.replace(/\n/g, '<br>') : renderMarkdown(message);
     messageDiv.innerHTML = '<div class="message-content"><div class="message-sender">' +
-        (sender === 'user' ? '你' : 'Ontrip') + '</div>' + message + '</div>';
+        (sender === 'user' ? '你' : 'Ontrip') + '</div>' + formatted + '</div>';
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
+// Convert server-rendered AI messages (Jinja2) to markdown on page load
+(function convertInitialMessages() {
+    document.querySelectorAll('.ai-message .message-content').forEach(function(content) {
+        // Skip if already processed
+        if (content.dataset.rendered) return;
+        content.dataset.rendered = '1';
+        // Extract sender div, render the rest as markdown
+        var sender = content.querySelector('.message-sender');
+        if (!sender) return;
+        // Get raw text (browser gives us the literal content including \n as text, not HTML)
+        var raw = content.textContent || '';
+        // Remove the sender label from the raw text
+        var label = sender.textContent || '';
+        if (raw.startsWith(label)) raw = raw.slice(label.length);
+        content.innerHTML = '';
+        content.appendChild(sender);
+        // Insert rendered markdown after the sender label
+        var rendered = document.createElement('span');
+        rendered.innerHTML = renderMarkdown(raw.trim());
+        content.appendChild(rendered);
+    });
+})();
 
 async function sendMessage() {
     const message = userInput.value.trim();
@@ -459,149 +512,4 @@ userInput.focus();
 function logout() {
     localStorage.removeItem(STORAGE_KEY_ACTIVE);
     window.location.href = '/logout';
-}
-
-// ================================================================
-// Mini DeepSeek 风格会话面板（浮层 overlay）
-// 等比例缩小 50%，叠加在现有页面之上
-// ================================================================
-
-var MINI_ICON = '<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
-var _miniOpen = false;
-var _miniLog = [];  // in-memory log for the mini panel
-
-/** Toggle the mini panel overlay */
-function toggleMiniPanel() {
-    _miniOpen = !_miniOpen;
-    var overlay = document.getElementById('mini-panel-overlay');
-    if (_miniOpen) {
-        overlay.classList.add('open');
-        refreshMiniPanel();
-    } else {
-        overlay.classList.remove('open');
-    }
-}
-
-/** Refresh the mini panel — pull conversations from the same API/localStorage */
-async function refreshMiniPanel() {
-    // Use the same data source as the main sidebar
-    var conversations = [];
-
-    // Try backend first
-    try {
-        var resp = await apiFetch('/conversations');
-        var data = await resp.json();
-        if (!data.error && data.conversations) {
-            conversations = data.conversations;
-        }
-    } catch (e) {}
-
-    // Fallback to localStorage cache
-    if (!conversations.length) {
-        var cached = loadFromStorage();
-        if (cached) conversations = cached;
-    }
-
-    renderMiniConvList(conversations);
-}
-
-/** Render DeepSeek-style grouped conversation list inside mini panel */
-function renderMiniConvList(conversations) {
-    var list = document.getElementById('mini-conv-list');
-    if (!conversations || !conversations.length) {
-        list.innerHTML = '<div class="mp-conv-empty">暂无历史对话<br>点击上方按钮开始新对话</div>';
-        return;
-    }
-
-    var activeId = currentSessionId;
-    var now = new Date();
-    var today0  = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-    var week0   = today0 - 7 * 86400000;
-
-    var groups = [
-        { label: '今天',  items: [] },
-        { label: '7天内', items: [] },
-        { label: '更早',  items: [] }
-    ];
-
-    var sorted = conversations.slice().sort(function(a,b){
-        // updated_at might be ISO string, parse it
-        var da = typeof a.updated_at === 'string' ? new Date(a.updated_at + 'Z').getTime() : (a.updated_at || 0);
-        var db = typeof b.updated_at === 'string' ? new Date(b.updated_at + 'Z').getTime() : (b.updated_at || 0);
-        return db - da;
-    });
-
-    sorted.forEach(function(c){
-        var t = typeof c.updated_at === 'string' ? new Date(c.updated_at + 'Z').getTime() : (c.updated_at || 0);
-        if (t >= today0) groups[0].items.push(c);
-        else if (t >= week0) groups[1].items.push(c);
-        else groups[2].items.push(c);
-    });
-
-    var html = '';
-    groups.forEach(function(g){
-        if (!g.items.length) return;
-        html += '<div class="mp-date-label">' + g.label + '</div>';
-        g.items.forEach(function(c){
-            var isActive = c.session_id === activeId;
-            var sid = c.session_id.replace(/'/g, "\\'");
-            html += '<div class="mp-conv-item' + (isActive ? ' active' : '') + '" ' +
-                'onclick="miniSwitchConv(\'' + sid + '\')">' +
-                '<div class="mp-conv-icon">' + MINI_ICON + '</div>' +
-                '<div class="mp-conv-title" title="' + escapeHtml(c.title) + '">' + escapeHtml(c.title) + '</div>' +
-                '<button class="mp-conv-del" onclick="event.stopPropagation();miniDeleteConv(\'' + sid + '\')" title="删除">×</button>' +
-                '</div>';
-        });
-    });
-    list.innerHTML = html;
-}
-
-/** Switch conversation from mini panel — syncs to main page */
-function miniSwitchConv(sessionId) {
-    switchConversation(sessionId);          // main page switch
-    var now = new Date().toLocaleTimeString();
-    _miniLog.unshift({ time: now, text: '切换到: ' + sessionId.substring(0,8) + '...' });
-    if (_miniLog.length > 30) _miniLog = _miniLog.slice(0,30);
-    renderMiniLog();
-    refreshMiniPanel();                    // update highlight
-}
-
-/** New conversation from mini panel */
-async function miniNewConversation() {
-    await newConversation();               // reuse main page logic
-    var now = new Date().toLocaleTimeString();
-    _miniLog.unshift({ time: now, text: '创建新对话' });
-    if (_miniLog.length > 30) _miniLog = _miniLog.slice(0,30);
-    renderMiniLog();
-    refreshMiniPanel();
-}
-
-/** Delete conversation from mini panel */
-async function miniDeleteConv(sessionId) {
-    await deleteConversation(sessionId);   // reuse main page logic
-    var now = new Date().toLocaleTimeString();
-    _miniLog.unshift({ time: now, text: '已删除: ' + sessionId.substring(0,8) + '...' });
-    if (_miniLog.length > 30) _miniLog = _miniLog.slice(0,30);
-    renderMiniLog();
-    refreshMiniPanel();
-}
-
-/** Clear mini panel operation log */
-function miniClearLog() {
-    _miniLog = [];
-    renderMiniLog();
-}
-
-/** Render mini panel operation log */
-function renderMiniLog() {
-    var el = document.getElementById('mini-log-display');
-    if (!_miniLog.length) {
-        el.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.65rem;text-align:center;padding:8px 0;">暂无日志</div>';
-        return;
-    }
-    var html = '';
-    _miniLog.forEach(function(l){
-        html += '<div class="mp-log-entry"><strong>' + l.time + '</strong> ' + escapeHtml(l.text) + '</div>';
-    });
-    el.innerHTML = html;
 }

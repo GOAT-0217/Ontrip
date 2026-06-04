@@ -38,8 +38,10 @@ class Config:
     # Form Submission API Settings
     FORM_SUBMISSION_API_URL: str = environ.get("FORM_SUBMISSION_API_URL", "")
     
-    # Blog Search API Settings
-    BLOG_SEARCH_API_URL: str = environ.get("BLOG_SEARCH_API_URL", "")
+    # Xiaohongshu (小红书) Search API Settings — via Apify
+    APIFY_API_TOKEN: str = environ.get("APIFY_API_TOKEN", "")
+    XHS_ACTOR_ID: str = environ.get("XHS_ACTOR_ID", "dltik/rednote-xiaohongshu-scraper")
+    XHS_MAX_RESULTS: int = int(environ.get("XHS_MAX_RESULTS", "10"))
 
     # AviationStack Real-time Flight API (legacy, kept as fallback)
     AVIATIONSTACK_API_KEY: str = environ.get("AVIATIONSTACK_API_KEY", "")

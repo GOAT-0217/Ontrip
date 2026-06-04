@@ -158,7 +158,7 @@ relevance_guardrail_agent_instructions = (
     "excursions/trip recommendations, "
     "e-commerce products and orders (via WooCommerce), "
     "contact form submissions, and "
-    "blog post searches. "
+    "Xiaohongshu travel guide searches. "
     "Conversational messages like 'Hi', 'OK', 'Thanks' are considered relevant. "
     "Flag as irrelevant only if the message is completely unrelated to these domains (e.g., 'How to build a spaceship?', 'What's the weather on Mars?').\n\n"
     "You MUST respond with a JSON object in this exact format:\n"

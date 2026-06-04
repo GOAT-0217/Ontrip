@@ -197,3 +197,54 @@ D:\Ontrip-main\
   - 修复 clearOperationLog bug（原实现调用 fetch 而非清空 DOM）.
   - 消息气泡优化、输入框毛玻璃效果、整体间距与视觉层次改进.
 
+## v0.0.5
+- 📕 **小红书攻略搜索智能体** — 将原有博客搜索（WordPress）完整替换为小红书实时搜索.
+  - **数据源对接**：通过 Apify 平台接入小红书搜索 Actor（`zen-studio~rednote-search-scraper`）.
+    - 首次 10 次试用免费，按量计费（$0.05/次 + $0.007/条结果），约 4 秒返回结果.
+    - 新增环境变量：`APIFY_API_TOKEN`、`XHS_ACTOR_ID`、`XHS_MAX_RESULTS`.
+  - **搜索策略**：按点赞数降序排列（`popularity_descending`），固定返回 Top 3 最热门笔记.
+    - 每条笔记完整展示：标题、作者、点赞/收藏数、发布时间、正文全文、可点击跳转链接.
+  - **多智能体路由优化**：主助手（Primary Assistant）工具选择规则重构.
+    - 旅行攻略/美食推荐/景点推荐类请求 → **优先委托小红书搜索助手**，不再走 web_search.
+    - web_search 降级为天气/交通/事实查询等场景使用.
+  - **双区输出格式**：助手回复分为两个区域.
+    - 📕 真实攻略区：原样展示小红书笔记，保留可点击链接.
+    - 📝 AI 旅行建议区：综合 Top 3 笔记内容，AI 总结出实用行程推荐、避坑提示、交通住宿建议.
+    - 搜索成功时两区都展示；搜索失败时仅展示 AI 建议并明确标注来源.
+  - **涉及文件**：
+    - `customer_support_chat/app/core/settings.py` — 新增 Apify/小红书配置项.
+    - `customer_support_chat/app/services/tools/blog.py` — 完整重写，调用 Apify API（启任务→轮询→取数据→格式化）.
+    - `customer_support_chat/app/services/assistants/blog_search_assistant.py` — 提示词改为小红书语境，双区输出+fallback 机制.
+    - `customer_support_chat/app/services/assistants/primary_assistant.py` — 路由优先级调整（攻略→小红书优先）.
+    - `customer_support_chat/app/graph.py` — 所有节点/边/路由从 `blog_*` 重命名为 `xhs_*`.
+    - `customer_support_chat/app/services/guardrails/guardrail_agents.py` — 相关性检测文案同步.
+    - `customer_support_chat/app/services/tools/__init__.py` — 导出 `search_xiaohongshu`.
+    - `.env` / `.env.example` — 新增 Apify 配置项及中文注释.
+
+- 🎨 **前端 Markdown 渲染支持** — 消息气泡支持富文本展示.
+  - 引入 `marked` 库（CDN）实现 Markdown → HTML 实时渲染.
+  - **链接三重保障机制**：正则预转换 → marked 渲染 → 正则兜底，确保 `[文字](URL)` 必定转为可点击超链接.
+  - 所有链接添加 `target="_blank" rel="noopener noreferrer"`，桌面端新标签页打开，手机端唤起小红书 APP.
+  - 用户消息保持纯文本（`\n` → `<br>`），AI 消息走完整 Markdown 渲染（标题、粗体、列表、引用、链接等）.
+  - 页面加载时自动转换 Jinja2 服务端渲染的历史消息.
+  - **涉及文件**：
+    - `web_app/app/templates/chat.html` — 引入 marked CDN.
+    - `web_app/app/static/ontrip.js` — 新增 `renderMarkdown()`、`convertInitialMessages()`，改造 `addMessage()`.
+
+- 🧹 **UI 清理** — 移除右下角冗余的 mini 会话面板浮层.
+  - 删除触发按钮（💬 云朵图标）及整个浮层 overlay.
+  - 清理关联的 HTML 结构、~140 行 JS 代码（10 个函数）、~180 行 CSS 样式.
+  - **涉及文件**：
+    - `web_app/app/templates/chat.html`
+    - `web_app/app/static/ontrip.js`
+    - `web_app/app/static/ontrip.css`
+
+- 🐛 **Bug 修复**.
+  - 修复 Apify Actor ID 格式错误（`/` 分隔 → `~` 分隔，商店 Actor 专用格式）.
+  - 修复搜索参数名不匹配（`search` → `keywords` 数组，`sort` → `sortType`）.
+  - 修复数据集获取 URL（`/acts/{id}/runs/{runId}/dataset/items` → `/datasets/{datasetId}/items`）.
+  - 修复笔记字段映射（嵌套对象 `author.nickname`、`engagement.liked_count` 等）.
+  - 修复 LLM 绕过 limit 参数导致返回超过 3 条结果（改为工具内部硬编码 `limit=3`）.
+  - 修复主助手将旅行计划误判为"推荐"类请求而走 web_search 的问题.
+  - 修复助手将小红书搜索结果改写为自己编的攻略的问题（提示词加硬约束 + 双区输出）.
+

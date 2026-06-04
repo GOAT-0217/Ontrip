@@ -44,14 +44,14 @@ from customer_support_chat.app.services.tools.woocommerce import (
   search_orders,
 )
 from customer_support_chat.app.services.tools.forms import submit_form
-from customer_support_chat.app.services.tools.blog import search_blog_posts
+from customer_support_chat.app.services.tools.blog import search_xiaohongshu
 from customer_support_chat.app.services.assistants.form_submission_assistant import (
   form_submission_assistant,
   ToFormSubmission,
 )
 from customer_support_chat.app.services.assistants.blog_search_assistant import (
-  blog_search_assistant,
-  ToBlogSearch,
+  xiaohongshu_search_assistant,
+  ToXiaohongshuSearch,
 )
 
 from customer_support_chat.app.services.assistants.primary_assistant import (
@@ -164,7 +164,7 @@ def guardrail_check(state: State, config: RunnableConfig):
             "reasoning": relevance_result.reasoning,
         })
         return {
-            "messages": [HumanMessage(content=f"I can only help with queries related to flights, hotels, car rentals, excursions, e-commerce, forms, and blog searches. Your query seems unrelated.")]
+            "messages": [HumanMessage(content=f"I can only help with queries related to flights, hotels, car rentals, excursions, e-commerce, forms, and Xiaohongshu travel guides. Your query seems unrelated.")]
         }
 
     logger.info("✅ Input passed all safety and relevance checks.")
@@ -291,33 +291,33 @@ def route_form_submission_tools(state: State) -> Literal["form_submission", "pri
 builder.add_conditional_edges("form_submission_safe_tools", route_form_submission_tools)
 builder.add_conditional_edges("form_submission", route_form_submission)
 
-# Blog Search Assistant
+# Xiaohongshu Search Assistant (小红书攻略搜索)
 builder.add_node(
-  "enter_blog_search",
-  create_entry_node("Blog Search Assistant", "blog_search"),
+  "enter_xhs_search",
+  create_entry_node("Xiaohongshu Search Assistant", "xhs_search"),
 )
-builder.add_node("blog_search", blog_search_assistant)
-builder.add_edge("enter_blog_search", "blog_search")
+builder.add_node("xhs_search", xiaohongshu_search_assistant)
+builder.add_edge("enter_xhs_search", "xhs_search")
 builder.add_node(
-  "blog_search_safe_tools",
-  create_tool_node_with_fallback([search_blog_posts, CompleteOrEscalate]), # Include blog search tool
+  "xhs_search_safe_tools",
+  create_tool_node_with_fallback([search_xiaohongshu, CompleteOrEscalate]),
 )
 
-def route_blog_search(state: State) -> Literal[
-  "blog_search_safe_tools",
+def route_xhs_search(state: State) -> Literal[
+  "xhs_search_safe_tools",
   "primary_assistant",
   "__end__",
 ]:
   route = tools_condition(state)
   if route == END:
       return END
-  return "blog_search_safe_tools"
+  return "xhs_search_safe_tools"
 
-def route_blog_search_tools(state: State) -> Literal["blog_search", "primary_assistant"]:
-    return "primary_assistant" if should_route_to_primary(state) else "blog_search"
+def route_xhs_search_tools(state: State) -> Literal["xhs_search", "primary_assistant"]:
+    return "primary_assistant" if should_route_to_primary(state) else "xhs_search"
 
-builder.add_conditional_edges("blog_search_safe_tools", route_blog_search_tools)
-builder.add_conditional_edges("blog_search", route_blog_search)
+builder.add_conditional_edges("xhs_search_safe_tools", route_xhs_search_tools)
+builder.add_conditional_edges("xhs_search", route_xhs_search)
 
 builder.add_conditional_edges("update_flight_safe_tools", route_update_flight_tools)
 builder.add_conditional_edges("update_flight_sensitive_tools", route_update_flight_tools)
@@ -444,7 +444,7 @@ def route_primary_assistant(state: State) -> Literal[
   "enter_book_excursion",
   "enter_woocommerce", # New route
   "enter_form_submission", # New route
-  "enter_blog_search", # New route
+  "enter_xhs_search", # Xiaohongshu search
   "__end__",
 ]:
   from langgraph.prebuilt import tools_condition
@@ -471,8 +471,8 @@ def route_primary_assistant(state: State) -> Literal[
           return "enter_woocommerce"
       elif tool_name == ToFormSubmission.__name__:
           return "enter_form_submission"
-      elif tool_name == ToBlogSearch.__name__:
-          return "enter_blog_search"
+      elif tool_name == ToXiaohongshuSearch.__name__:
+          return "enter_xhs_search"
       else:
           return "primary_assistant_tools"
   logger.info(f"route_primary_assistant: no tool_calls, returning primary_assistant")
@@ -488,7 +488,7 @@ builder.add_conditional_edges(
       "enter_book_excursion": "enter_book_excursion",
       "enter_woocommerce": "enter_woocommerce", # New edge
       "enter_form_submission": "enter_form_submission", # New edge
-      "enter_blog_search": "enter_blog_search", # New edge
+      "enter_xhs_search": "enter_xhs_search", # Xiaohongshu search
       "primary_assistant_tools": "primary_assistant_tools",
       END: END,
   },
